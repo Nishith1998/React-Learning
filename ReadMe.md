@@ -6,7 +6,7 @@ Mobile apps and desktop apps feel very **Reactive**: things happen instantly, yo
 
 Traditionally, in web apps, you click a link and wait for a new page to load. You click a button and wait for some action to complete.
 
-    </> --request--> Server --html--> </>
+    **</>** --request--> **Server** --html--> **</>**
 
 ### </>
 JavaScript runs in the browser - on the loaded page
