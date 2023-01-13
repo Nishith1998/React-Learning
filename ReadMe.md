@@ -6,9 +6,9 @@ Mobile apps and desktop apps feel very **Reactive**: things happen instantly, yo
 
 Traditionally, in web apps, you click a link and wait for a new page to load. You click a button and wait for some action to complete.
 
-    **</>** --request--> **Server** --html--> **</>**
+> **</>** --request--> Server --html--> **</>**
 
-### </>
+### </> (Client side JS page)
 JavaScript runs in the browser - on the loaded page
 
 You can manipulate the HTML structure (DOM) of the page.
@@ -24,6 +24,29 @@ React does the same thing.
 
     Declarative, component-focused approach
 
-With JavaScript we can achieve same functionality as React but it would be more complex code for developer to read.
+> HTML, CSS & JavaScript are about building user interfaces as well
+  React makes building **complex**, **interactive** and **reactive** user interfaces **simpler**
 
 https://github.com/academind/react-complete-guide-code/tree/01-getting-started/code/react-vs-vanilla-js-example
+
+> React is all about **"Components"**
+
+### Why Components ?
+    Reusability - Don't repeat yourself
+    Separation of Concerns - Don't do too many things in one and same place(function)
+        -->Split big chunks of code into multiple smaller functions<--
+
+### Declarative Approach
+React allows you to create **re-usable and reactive components** consisting of **HTML and JavaScript** (and CSS).
+
+    Define the desired target state(s) and let React figure out the actual JavaScript DOM instructions.
+
+## Create React App
+Install Node.js in your system (https://nodejs.org/en/download/).
+
+    npx create-react-app my-app
+    cd my-app
+    npm start
+
+Reference: https://reactjs.org/docs/create-a-new-react-app.html#create-react-app
+
