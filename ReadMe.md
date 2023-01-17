@@ -109,3 +109,178 @@ This will not just include our source code (all functional component) but the en
 
 > JSX is **not HTML** code but it is developer friendly version of the code that will transfor to browser friendly code.
 
+JSX syntax includes all native HTML elements and there attributes. Attributes name are slightly changed. (eg **class** in HTML --> **className** in JSX)
+
+JSX differs native element and custom component from react by checking case of the name.
+
+**HTML elements** will always start with **lowercase** while **custom react** components must be in **Capitlize** format
+
+#### Writing complex JSX code
+
+> You must only have one root element per JSX code snippet or per return statement
+
+
+    // Example containing more than one root element in return statment which is not correct implementation.
+
+    import Expenses from "./components/Expenses/Expenses";
+
+    const App = () => {
+    return <div><h2>Let's get started!</h2></div><div>Description of the content</div>
+    
+    }
+
+    export default App;
+
+One solution is to wrap the code into another div.
+
+    // Example containing correct implementation of JSX code snippet.
+
+    import Expenses from "./components/Expenses/Expenses";
+
+    const App = () => {
+    return ( 
+        <div>
+            <div>
+                <h2>Let's get started!</h2>
+            </div>
+            <div>
+                Description of the content
+            </div>
+        <div>
+    );
+    }
+
+    export default App;
+
+#### Why more than one root element is not allowed in return statement (or in JSX code snippet)?
+
+JSX code is transformed in JavaScript code as shown below:
+
+    import Expenses from './Expenses';
+
+    function CompName() {
+        const expenses = [{
+            id: "e1",
+            title: "Toilet Paper",
+            amount: 94.12,
+            date: new Date(2020, 7, 14),
+        }];
+        return (
+            <div>
+                <h2> Let's get Started! </h2>
+                <Expenses items={expenses}>
+            </div>
+        );
+    }
+>   Using React.createElement() we can create elements inside component, but it will be complex, hard to read for developers. 
+    
+    // alternative of JSX code
+    function CompName() {
+        
+        ...
+
+        return React.createElement('div', {}, 
+            React.createElement('h2', {}, "Let's get Started!"),
+            React.createElement(Expenses,{items: expenses})
+        ) 
+    }
+
+> React.createElement(ElementName, Attributes, ...content_inside_that_element)
+
+In Javascript we can not return more than one thing, So there must be only one root element in JSX code. 
+
+Reference: https://reactjs.org/docs/react-without-jsx.html
+
+### Adding Basic CSS Styling
+
+We can add css file by importing inside the react component.
+
+    // importing css file 
+
+    import 'path/fileName.css';
+
+    function CompName() {
+        ...
+    }
+
+### Outputting dynamic data and wokring with expressions in JSX
+
+We can write JavaScript logic before the return statement in react component.
+
+To use the Variables/functions inside the JSX code, the JavaScript expression will wrap into the single opening and closing curly braces.
+
+    // title variable is used inside JSX snippet using {}
+
+    function CompName() {
+        const title = "Hello World !!";
+        return (
+            <div>
+                {title} // "Hello World !!" will be rendered here.
+            </div>
+        );
+    }
+
+### Passing data via **props**
+
+If we want to pass data from parent component to child component we can do so using props.
+
+It is nothing but a parameter of component function which is passed to child component.
+
+props inlcudes attributes (className, customAttributes) (and also functions)
+
+    // App.js component passing custom attribute items to its child component Expenses
+
+    import Expenses from "./components/Expenses/Expenses";
+    import NewExpense from "./components/Expenses/NewExpense";
+
+    const App = () => {
+    const expenses = [
+        {
+            id: "e1",
+            title: "Toilet Paper",
+            amount: 94.12,
+            date: new Date(2020, 7, 14),
+        },
+        {
+            id: "e2",
+            title: "Ice Cream",
+            amount: 100.01,
+            date: new Date(2020, 7, 15),
+        },
+    ];
+
+    return (
+        <div>
+            <h2>Let's get started!</h2>
+            <Expenses items={expenses} />
+        </div>
+    );
+    }
+
+    export default App;
+
+
+> props makes components dynamic, we can resue the same component with different data.
+
+    // Expenses component gets the expenses (variable from App.js) data in props and again this data is passes to ExpenseItem component
+
+    import ExpenseItem from "./ExpenseItem";
+    const Expenses = (props) => {
+    return(
+        <div className="expenses">
+            <ExpenseItem
+                title={props.items[0].title}
+                amount={props.items[0].amount}
+                date={props.items[0].date}
+            />
+            <ExpenseItem
+                title={props.items[1].title}
+                amount={props.items[1].amount}
+                date={props.items[1].date}
+            />
+        </div>
+    );
+    };
+
+    export default Expenses;
+
