@@ -12,18 +12,26 @@ const ExpenseForm = (hopes) => {
   const titleHandler = (event) => {
     console.log("value", event.target.value);
     // setTitle(event.target.value);
-    setForm({...formValue, title: event.target.value});
+    // setForm({...formValue, title: event.target.value});
+    setForm((prevState)=> {
+      return { ...prevState, title: event.target.value };
+    })
   };
   const amountHandler = (event) => {
     console.log("value", event.target.value);
     // setAmount(event.target.value);
-    setForm({...formValue, amount: event.target.value});
+    // setForm({...formValue, amount: event.target.value});
+    setForm((prevState)=> {
+      return { ...prevState, amount: event.target.value };
+    })
   };
   const dateHandler = (event) => {
     console.log("value", event.target.value);
     // setDate(event.target.value);
-    setForm({...formValue, date: event.target.value});
-
+    // setForm({...formValue, date: event.target.value});
+    setForm((prevState)=> {
+      return { ...prevState, date: event.target.value };
+    })
   };
 
   const onSubmit = (event) => {
