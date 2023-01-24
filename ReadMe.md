@@ -23,7 +23,7 @@ React does the same thing.
 
 ## Index
 
-|  Title |
-|--------------------------------------------|
-| [1. React Basics & Working with Components](./ReadMeDocumentation/1.%20React%20Basics%20%26%20Working%20with%20Components.md) | 
-| [2. React State & Working with Events](./ReadMeDocumentation/2.%20React%20State%20%26%20Working%20with%20Events.md)
+| Sr | Title |
+|--|--------------------------------------------|
+| 1. | [ React Basics & Working with Components](./ReadMeDocumentation/1.%20React%20Basics%20%26%20Working%20with%20Components.md) | 
+| 2. | [ React State & Working with Events](./ReadMeDocumentation/2.%20React%20State%20%26%20Working%20with%20Events.md)
