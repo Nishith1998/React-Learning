@@ -30,7 +30,7 @@ const ExpenseForm = (hopes) => {
     // setDate(event.target.value);
     // setForm({...formValue, date: event.target.value});
     setForm((prevState)=> {
-      return { ...prevState, date: event.target.value };
+      return { ...prevState, date: new Date(event.target.value) };
     })
   };
 
@@ -61,7 +61,7 @@ const ExpenseForm = (hopes) => {
         <div className="new-expense__control">
           <label>Date</label>
           {/* <input type="date" onChange={dateHandler} value={dateValue} /> */}
-          <input type="date" onChange={dateHandler} value={formValue.date} />
+          <input type="date" onChange={dateHandler} value={formValue.date.toDateString} />
         </div>
       </div>
       <div className="new-expense__actions">
