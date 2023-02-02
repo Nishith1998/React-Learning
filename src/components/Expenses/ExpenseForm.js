@@ -61,8 +61,11 @@ const ExpenseForm = (hopes) => {
         <div className="new-expense__control">
           <label>Date</label>
           {/* <input type="date" onChange={dateHandler} value={dateValue} /> */}
-          <input type="date" onChange={dateHandler} value={formValue.date.toDateString} />
+          <input type="date" onChange={dateHandler} value={formValue.date} />
         </div>
+      </div>
+      <div>
+      {/* {'asdf:' + formValue.date.toDateString()} */}
       </div>
       <div className="new-expense__actions">
         <button type="submit">Submit</button>
