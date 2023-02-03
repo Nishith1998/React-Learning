@@ -30,7 +30,7 @@ const ExpenseForm = (hopes) => {
     // setDate(event.target.value);
     // setForm({...formValue, date: event.target.value});
     setForm((prevState)=> {
-      return { ...prevState, date: new Date(event.target.value) };
+      return { ...prevState, date: event.target.value };
     })
   };
 
@@ -38,13 +38,18 @@ const ExpenseForm = (hopes) => {
     event.preventDefault(); // to prevent page refresh on click of submit button 
     // console.log("values:", titleValue, amountValue, dateValue);
     // hopes.onSubmit({title: titleValue, amount: amountValue, date: dateValue});
-    hopes.onSubmit(formValue);
+    hopes.onSubmit({...formValue, date: new Date(formValue.date)});
+    hopes.hideForm();
 
     // setTitle("");
     // setAmount("");
     // setDate("");
     setForm({title: '', amount: '', date: ''});
   };
+
+  const cancelClickHandler = () => {
+    hopes.hideForm();
+  }
   return (
     <form onSubmit={onSubmit}>
       <div className="new-expense__controls">
@@ -68,6 +73,7 @@ const ExpenseForm = (hopes) => {
       {/* {'asdf:' + formValue.date.toDateString()} */}
       </div>
       <div className="new-expense__actions">
+        <button onClick={cancelClickHandler}>Cancel</button>
         <button type="submit">Submit</button>
       </div>
     </form>
