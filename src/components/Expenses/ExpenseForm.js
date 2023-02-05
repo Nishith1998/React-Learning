@@ -38,7 +38,7 @@ const ExpenseForm = (hopes) => {
     event.preventDefault(); // to prevent page refresh on click of submit button 
     // console.log("values:", titleValue, amountValue, dateValue);
     // hopes.onSubmit({title: titleValue, amount: amountValue, date: dateValue});
-    hopes.onSubmit({...formValue, date: new Date(formValue.date)});
+    hopes.onSubmit({...formValue, date: new Date(formValue.date), amount: Number(formValue.amount)});
     hopes.hideForm();
 
     // setTitle("");

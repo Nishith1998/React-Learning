@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/Expenses/NewExpense";
 
@@ -30,6 +30,27 @@ const EXPENSES = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(EXPENSES);
+  const [prompt, setPrompt] = useState(null);
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setPrompt(e);
+    });
+  }, []);
+
+  const handleInstall = () => {
+    // if (!prompt) return;
+    prompt.prompt();
+    prompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      setPrompt(null);
+    });
+  };
 
   const addExpenseHandler = (value) => {
     debugger;
@@ -38,6 +59,7 @@ const App = () => {
   };
   return (
     <div>
+      <button onClick={handleInstall}>Install</button>
       <h2>Let's get started!</h2>
       <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses items={expenses} />
