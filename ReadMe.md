@@ -26,4 +26,5 @@ React does the same thing.
 | Sr | Title |
 |--|--------------------------------------------|
 | 1. | [ React Basics & Working with Components](./ReadMeDocumentation/1.%20React%20Basics%20%26%20Working%20with%20Components.md) | 
-| 2. | [ React State & Working with Events](./ReadMeDocumentation/2.%20React%20State%20%26%20Working%20with%20Events.md)
+| 2. | [ React State & Working with Events](./ReadMeDocumentation/2.%20React%20State%20%26%20Working%20with%20Events.md) |
+| 3. | [ React State & Working with Events](./ReadMeDocumentation/3.%20Rendering%20Lists%20%26%20Conditional%20Content.md) |
