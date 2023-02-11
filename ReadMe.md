@@ -29,5 +29,5 @@ React does the same thing.
 | 2. | [ React State & Working with Events](./ReadMeDocumentation/2.%20React%20State%20%26%20Working%20with%20Events.md) |
 | 3. | [ Rendering Lists & Conditional Content](./ReadMeDocumentation/3.%20Rendering%20Lists%20%26%20Conditional%20Content.md) |
 | 4. | [ Styling React Components](./ReadMeDocumentation/4.%20Styling%20React%20Components.md) |
-
-| 5. | [ Debugging React Apps](./ReadMeDocumentation/5.%20Debugging%20React%20Apps.md |
+| 5. | [ Debugging React Apps](./ReadMeDocumentation/5.%20Debugging%20React%20Apps.md) |
+| 6. | [ Working with Fragments, Portals & Refs](./ReadMeDocumentation/6.%20Working%20with%20Fragments%2C%20Portals%20%26%20Refs.md) |
