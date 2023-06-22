@@ -1,6 +1,7 @@
 import { useState, useEffect  } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/Expenses/NewExpense";
+// import SomeComp from "./components/SomeComp";
 
 const EXPENSES = [
   {
@@ -60,6 +61,7 @@ const App = () => {
   return (
     <div>
       <button onClick={handleInstall}>Install</button>
+      {/* <SomeComp /> */}
       <h2>Let's get started!</h2>
       <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses items={expenses} />

@@ -1,8 +1,13 @@
+import { useState } from "react";
+
 const SomeComp = () => {
     const listOfItems1 = [{name: 'asdf1', id: 1}, {name: 'asdf2', id: 2}];
     const [listOfItems, setListOfItems] = useState(listOfItems1);
     const clickHandler = () => {
-        setListOfItems(pervState => [...prevState, {name: 'asdf3', id: 3}]);
+        setListOfItems(pervState => {
+            let updatedId = pervState[pervState.length - 1].id + 1;
+            return [...pervState, {name: 'asdf' + updatedId, id: updatedId}]
+        });
     }
     return (
         <div>
@@ -15,10 +20,10 @@ const SomeComp = () => {
 
 export default SomeComp;
 
-const CustomComp = () => {
+const CustomComp = (props) => {
     return (
         <div>
-            {item.name}
+            {props.nameInfo.name}
         </div>
     )
 }
