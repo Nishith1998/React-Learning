@@ -2,15 +2,49 @@ import { useState } from "react";
 import { InputField } from "../InputField/InputField";
 import { Keypad } from "../Keypad/Keypad";
 
-const calculateString = function(str: string) {
+const calculateString = function(str: string): string {
     let arr = Array.from(str);
-    arr.indexOf('/');
+    let result: number = 0;
+
+      while (true) {
+        let indexOfDivision = arr.indexOf("/");
+        if (indexOfDivision === -1) break;
+        result = +arr[indexOfDivision - 1] / +arr[indexOfDivision + 1];
+        arr.splice(indexOfDivision - 1, 3, String(result));
+      }
+
+      while (true) {
+        let indexOfDivision = arr.indexOf("*");
+        if (indexOfDivision === -1) break;
+        result = +arr[indexOfDivision - 1] * +arr[indexOfDivision + 1];
+        arr.splice(indexOfDivision - 1, 3, String(result));
+      }
+
+      while (true) {
+        let indexOfDivision = arr.indexOf("-");
+        if (indexOfDivision === -1) break;
+        result = +arr[indexOfDivision - 1] - +arr[indexOfDivision + 1];
+        arr.splice(indexOfDivision - 1, 3, String(result));
+      }
+
+      while (true) {
+        let indexOfDivision = arr.indexOf("+");
+        if (indexOfDivision === -1) break;
+        result = +arr[indexOfDivision - 1] + +arr[indexOfDivision + 1];
+        arr.splice(indexOfDivision - 1, 3, String(result));
+      }
+
+      if(arr.includes('NaN')) {
+        return "Invalid input"
+      } else {
+        return String(result);
+      }
 }
 
 export const Layout = () => {
   const [inputValue, setInputValue] = useState("");
   const [clearInput, setClearInput] = useState(false);
-  //   let clearInput = false;
+
   const onInputChange = (value: string) => {
     console.log("Layout comp: input changed value", value);
     if (value === "clear") {
@@ -18,11 +52,7 @@ export const Layout = () => {
       setClearInput(false);
     } else if (value === "=") {
       setInputValue((prevState: string) => {
-        try { 
-            return Function(`return ${prevState}`)();
-        } catch {
-            return "Error: Invalid input"
-        }
+        return calculateString(prevState);
       });
       setClearInput(true);
     } else {
@@ -31,13 +61,10 @@ export const Layout = () => {
       setClearInput(false);
     }
   };
-  // const onButtonClick = (btnValue: string) => {
-  //     console.log("Layout comp: button click value", btnValue)
-  // }
+
   return (
     <>
       <InputField onInputChange={onInputChange} inputValue={inputValue} />
-      {/* <Button btnValue="1" onBtnClick={onButtonClick}/> */}
       <Keypad onButtonClick={onInputChange} />
     </>
   );
