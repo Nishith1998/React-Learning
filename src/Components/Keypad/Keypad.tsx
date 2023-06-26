@@ -25,17 +25,14 @@ const KEYPAD = [
     { label: "=", class: "bg-red" },
   ],
 ];
-export const Keypad = (props: { onButtonClick: (arg0: string) => void }) => {
+export const Keypad = (props: { onButtonClick: (value: string, isKeyPressed: boolean) => void }) => {
   return (
-    <div style={{ width: "20rem" }}>
+    <div className={styles['keypad-width']}>
       {KEYPAD.map(
         (item: { label: string; class?: string }[], outerIndex: number) => (
           <div
             key={outerIndex}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-            }}
+            className={styles['grid-cols-4']}
           >
             {item.map(
               (
@@ -50,7 +47,7 @@ export const Keypad = (props: { onButtonClick: (arg0: string) => void }) => {
                       : innerItem.class
                   }
                   btnValue={innerItem.label}
-                  onBtnClick={(btnValue) => props.onButtonClick(btnValue)}
+                  onBtnClick={(btnValue) => props.onButtonClick(btnValue, false)}
                 />
               )
             )}
