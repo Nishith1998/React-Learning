@@ -33,3 +33,6 @@ React does the same thing.
 | 6. | [ Working with Fragments, Portals & Refs](./ReadMeDocumentation/6.%20Working%20with%20Fragments%2C%20Portals%20%26%20Refs.md) |
 | 7. | [ Handling Side Effects ](./ReadMeDocumentation/7.%20Handing%20Side%20Effects%2C%20Using%20Reducers%20%26%20Using%20Cotext%20API.md) |
 | 8. | [ Using useReducers ](./ReadMeDocumentation/8.%20Using%20Reducers.md) |
+| 9. | [ Context ](./ReadMeDocumentation/9.%20React%20Context.md) |
+| 10. | [ Rules of Hooks ](./ReadMeDocumentation/10.%20Rules%20of%20Hooks.md) |
+| 11. | [ How React Works ](./ReadMeDocumentation/11.%20Behind%20the%20Scenes.md) |
