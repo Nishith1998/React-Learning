@@ -4,6 +4,7 @@ export const Button = (props: {
   className?: string;
   onBtnClick: (btnValue: string) => void;
   btnValue: string;
+  btnLabel: string;
 }) => {
   let btnClickHandler = () => {
     props.onBtnClick(props.btnValue);
@@ -14,7 +15,7 @@ export const Button = (props: {
       className={props.className + " " + styles.button}
       onClick={btnClickHandler}
     >
-      {props.btnValue}
+      {props.btnLabel}
     </div>
   );
 };
