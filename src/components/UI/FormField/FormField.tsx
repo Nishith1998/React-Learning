@@ -3,8 +3,8 @@ import React, { ChangeEvent } from "react";
 export const FormField = (props: any) => {
   let formFieldJSX;
 
-  const onInputChangeHandler = (label: string, value: string, isInValid: boolean) => {
-    props.onInputChange({ label: label, value: value, isInValid: isInValid});
+  const onInputChangeHandler = (label: string, value: string, isValid: boolean) => {
+    props.onInputChange(label, value, isValid);
   };
 
   console.log("rUNNING");
@@ -18,7 +18,7 @@ export const FormField = (props: any) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             onInputChangeHandler(props.id, event.target.value, props.isValid(event.target.value))
           }
-          className={props.isInValid ? 'bg-red' : '' }
+          className={props.form[props.id].isValid === false ? 'bg-red-200' : 'bg-white' }
         ></input>
       </>
     );
@@ -79,7 +79,7 @@ export const FormField = (props: any) => {
     );
   }
   return (
-    <div className="grid grid-cols-2 gap-2" key={props.id}>
+    <div className="grid grid-cols-2 gap-2 my-2" key={props.id}>
       {formFieldJSX}
     </div>
   );
