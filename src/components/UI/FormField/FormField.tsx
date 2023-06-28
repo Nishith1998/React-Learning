@@ -6,9 +6,10 @@ export const FormField = (props: any) => {
   const onInputChangeHandler = (
     label: string,
     value: string,
-    isValid: boolean
+    isValid: boolean,
+    type?: string
   ) => {
-    props.onInputChange(label, value, isValid);
+    props.onInputChange(label, value, isValid, type);
   };
 
   const isFormValid = () => {
@@ -21,13 +22,18 @@ export const FormField = (props: any) => {
         <label htmlFor={props.attributes.id}>{props.label}</label>
         <input
           {...props.attributes}
-          value={props.form[props.id].value}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          value={props.attributes.type === 'file' ? '' : props.form[props.id].value}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            if(props.attributes.type === 'file') {
+              let url = event.target.files?.[0] ? URL.createObjectURL(event.target.files[0]) : '';
+              console.log(url);
+            }
             onInputChangeHandler(
               props.id,
               event.target.value,
-              props.isValid(event.target.value)
-            )
+              props.isValid(event.target.value),
+              props.attributes.type
+            )}
           }
           className={
             props.form[props.id].isValid === false ? "bg-red-200" : "bg-white"
@@ -50,7 +56,7 @@ export const FormField = (props: any) => {
             )
           }
         >
-          <option disabled>
+          <option disabled selected>
             Select an option
           </option>
           {props.options.map((option: { label: string; value: string }) => (

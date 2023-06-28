@@ -1,38 +1,17 @@
 import { useState } from "react";
 import { Form } from "../Form/Form";
 import { UserInfo } from "../User/UserInfo";
+import { formValueType } from "../../models/types";
+import { INITIAL_FORM_VALUE } from "../../models/constants";
 
 export const Layout = () => {
-  const userDetailsInitialState: { [key: string]: string }[] = [
-    // {
-    //     "firstName": "adfs",
-    //     "lastName": "asadf",
-    //     "name": "asfs asadf",
-    //     "email": "ngoswami@deqode.com",
-    //     "dob": "1998-12-16",
-    //     "highestEducation": "graduate",
-    //     "designation": "solutionEngineer",
-    //     "gender": "male",
-    //     "profilePic": "C:\\fakepath\\Screenshot from 2023-06-05 16-30-00.png",
-    //     "submitButton": ""
-    // }
-  ];
-  const currentUserFormValueInitialState: {[key: string]: string} =     {
-    // "firstName": "adfs",
-    // "lastName": "asadf",
-    // "name": "asfs asadf",
-    // "email": "ngoswami@deqode.com",
-    // "dob": "1998-12-16",
-    // "highestEducation": "graduate",
-    // "designation": "solutionEngineer",
-    // "gender": "male",
-    // "profilePic": "C:\\fakepath\\Screenshot from 2023-06-05 16-30-00.png",
-    // "submitButton": ""
-}
-  const [userDetails, setUserDetails] = useState(userDetailsInitialState);
-  const [currentUserFormValue, setCurrentUserFormValue] = useState(currentUserFormValueInitialState);
+  const userDetailsInitialState: formValueType[] = [];
+  const currentUserFormValueInitialState: formValueType = INITIAL_FORM_VALUE;
+  
+  const [userDetails, setUserDetails] = useState<formValueType[]>(userDetailsInitialState);
+  const [currentUserFormValue, setCurrentUserFormValue] = useState<formValueType>(currentUserFormValueInitialState);
 
-  const addUserHandler = (userInfo: { [key: string]: string }) => {
+  const addUserHandler = (userInfo: formValueType ) => {
     setUserDetails((prevState) => {
       const indexOfItem = userDetails.findIndex(ele => ele.email === userInfo.email)
       if( indexOfItem === -1) {
@@ -44,7 +23,7 @@ export const Layout = () => {
     });
   };
 
-  const onDeleteHandler = (item: { [key: string]: string }) => {
+  const onDeleteHandler = (item: formValueType) => {
     setUserDetails((prevState) => {
       let indexOfItem = prevState.findIndex((ele) => ele.email === item.email);
       prevState.splice(indexOfItem, 1);
@@ -52,7 +31,7 @@ export const Layout = () => {
     });
   };
   
-  const onEditHandler = (item: { [key: string]: string }) => {
+  const onEditHandler = (item: formValueType) => {
     console.log("edit" , item)
       setCurrentUserFormValue(item);
   };
