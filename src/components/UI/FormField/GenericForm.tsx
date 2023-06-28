@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { formField } from "../../../models/types";
 import { FormField } from "./FormField";
 import { Card } from "../Card/Card";
@@ -8,20 +8,24 @@ export const GenericForm = (props: { formFields: formField[], onSubmit: any }) =
     [key: string]: { value: string; isValid: boolean | null };
   };
 
-  const formStructure: FormStructureType = {};
-  props.formFields.forEach(
-    (ele: formField) => {
-      formStructure[ele.id] = { value: ele.value ?? '', isValid: ele.type === 'button' ? true : null }
-  }  
-  );
+  const formStructureInitial: FormStructureType = {};
+  props.formFields.forEach(ele => {
+    formStructureInitial[ele.id] = {value: ele.value ?? '', isValid: ele.type === 'button' ? true : ele.isValid?.(ele.value ?? '') ?? null}
+  });
+  const [form, setForm] = useState(formStructureInitial);
 
-  const [form, setForm] = useState(formStructure);
-  const [newFormFields, setNewFormFields] = useState(props.formFields)
-
-  console.log("State value: ", form);
+  useEffect(() => {
+    const formStructureModified: FormStructureType = {}
+    props.formFields.forEach(ele => {
+      formStructureModified[ele.id] = {value: ele.value ?? '', isValid: ele.isValid?.(ele.value ?? '') ?? null}
+    });
+    console.log("GenericForm: useEffect", formStructureModified)
+    setForm(formStructureModified);
+  },[props.formFields])
 
   const onInputChange = (label: string, value: string, isValid: boolean) => {
     setForm((prevForm) => {
+      console.log("GenericForm: setForm",{ ...prevForm, [label]: { value: value, isValid: isValid } })
       return { ...prevForm, [label]: { value: value, isValid: isValid } };
     });
   };
@@ -39,7 +43,7 @@ export const GenericForm = (props: { formFields: formField[], onSubmit: any }) =
   return (
     <Card>
       <form onSubmit={submitHandler}>
-        {newFormFields.map((field: formField) => (
+        {props.formFields.map((field: formField) => (
           <FormField
             key={field.id}
             isValid={form[field.id].isValid}

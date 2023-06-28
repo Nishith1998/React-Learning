@@ -89,10 +89,12 @@ const formFields: formField[] = [
     label: "Submit",
     classes: "bg-blue-200 w-20",
     attributes: { id: "submitButton", type: "submit" },
+    isValid: (value: string) => true
   },
 ];
 
 export const Form = (props: any) => {
+  console.log("Form: props", props);
   const onSubmit = (formValue: { [key: string]: string }) => {
     console.log(formValue);
     props.onAddUser({
@@ -100,9 +102,7 @@ export const Form = (props: any) => {
       name: formValue.firstName + formValue.lastName,
     });
   };
-  // formFields.forEach(fields => {
-  //   fields.value = props.formValue[fields.id];
-  // })
+
   const [newValue, setNewValue] = useState(formFields.map(fields => {
     fields.value = props.formValue[fields.id];
     return fields;
@@ -115,7 +115,8 @@ export const Form = (props: any) => {
     });
     setNewValue(newValue);
     console.log("newVla", newValue);
-  }, [props]);
+  }, [props.formValue]);
+
   return (
     <Card className="flex-col bg-slate-50">
       <GenericForm formFields={newValue} onSubmit={onSubmit} />

@@ -21,7 +21,7 @@ export const FormField = (props: any) => {
         <label htmlFor={props.attributes.id}>{props.label}</label>
         <input
           {...props.attributes}
-          value={props.value}
+          value={props.form[props.id].value}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             onInputChangeHandler(
               props.id,
@@ -50,7 +50,7 @@ export const FormField = (props: any) => {
             )
           }
         >
-          <option disabled selected>
+          <option disabled>
             Select an option
           </option>
           {props.options.map((option: { label: string; value: string }) => (

@@ -17,7 +17,18 @@ export const Layout = () => {
     //     "submitButton": ""
     // }
   ];
-  const currentUserFormValueInitialState: {[key: string]: string} = {}
+  const currentUserFormValueInitialState: {[key: string]: string} =     {
+    // "firstName": "adfs",
+    // "lastName": "asadf",
+    // "name": "asfs asadf",
+    // "email": "ngoswami@deqode.com",
+    // "dob": "1998-12-16",
+    // "highestEducation": "graduate",
+    // "designation": "solutionEngineer",
+    // "gender": "male",
+    // "profilePic": "C:\\fakepath\\Screenshot from 2023-06-05 16-30-00.png",
+    // "submitButton": ""
+}
   const [userDetails, setUserDetails] = useState(userDetailsInitialState);
   const [currentUserFormValue, setCurrentUserFormValue] = useState(currentUserFormValueInitialState);
 
