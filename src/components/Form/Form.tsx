@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { formField } from "../../models/types";
 import { Card } from "../UI/Card/Card";
 import { GenericForm } from "../UI/FormField/GenericForm";
@@ -27,7 +28,11 @@ const formFields: formField[] = [
     label: "Email",
     attributes: { id: "email", type: "email", placeholder: "abc@xyz.com" },
     isValid: (value: string) => {
-      return value ? /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value.trim())  : false;
+      return value
+        ? /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+            value.trim()
+          )
+        : false;
     },
   },
   {
@@ -35,7 +40,8 @@ const formFields: formField[] = [
     type: "input",
     label: "DOB",
     attributes: { id: "email", type: "date", placeholder: "dd/mm/yyyy" },
-    isValid: (value: string) => new Date().getFullYear() - new Date(value).getFullYear() > 18,
+    isValid: (value: string) =>
+      new Date().getFullYear() - new Date(value).getFullYear() > 18,
   },
   {
     id: "highestEducation",
@@ -70,19 +76,49 @@ const formFields: formField[] = [
     ],
     isValid: (value: string) => value.trim().length !== 0,
   },
+  // {
+  //   id: "profilePic",
+  //   type: "input",
+  //   label: "Upload profile picture",
+  //   attributes: { type: "file" },
+  //   isValid: (value: string) => value.trim().length !== 0,
+  // },
   {
     id: "submitButton",
     type: "button",
     label: "Submit",
-    attributes: { id: "submitButton" },
-    // isValid: (value: string) => true,
+    classes: "bg-blue-200 w-20",
+    attributes: { id: "submitButton", type: "submit" },
   },
 ];
 
-export const Form = () => {
+export const Form = (props: any) => {
+  const onSubmit = (formValue: { [key: string]: string }) => {
+    console.log(formValue);
+    props.onAddUser({
+      ...formValue,
+      name: formValue.firstName + formValue.lastName,
+    });
+  };
+  // formFields.forEach(fields => {
+  //   fields.value = props.formValue[fields.id];
+  // })
+  const [newValue, setNewValue] = useState(formFields.map(fields => {
+    fields.value = props.formValue[fields.id];
+    return fields;
+  }));
+  useEffect(() => {
+    console.log();
+    const newValue = formFields.map((fields) => {
+      fields.value = props.formValue[fields.id];
+      return fields;
+    });
+    setNewValue(newValue);
+    console.log("newVla", newValue);
+  }, [props]);
   return (
     <Card className="flex-col bg-slate-50">
-      <GenericForm formFields={formFields} />
+      <GenericForm formFields={newValue} onSubmit={onSubmit} />
     </Card>
   );
 };
