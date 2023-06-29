@@ -1,6 +1,6 @@
-import { formField, formValueType } from "./types";
+import { FormFieldType, FormValueType, TableHeaderType } from "./types";
 
-export const INITIAL_FORM_VALUE: formValueType = {
+export const INITIAL_FORM_VALUE: FormValueType = {
   firstName: "",
   lastName: "",
   email: "",
@@ -24,7 +24,7 @@ export const FROM_STRUCTURE_INITIAL = {
     submitButton: {value: '', isValid: true},
 }
 
-export const formFields: formField<formValueType>[] = [
+export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
   {
     id: "firstName",
     type: "input",
@@ -70,8 +70,10 @@ export const formFields: formField<formValueType>[] = [
     label: "Highest Education",
     attributes: { id: "highestEducation", placeholder: "Select one option" },
     options: [
-      { label: "Graduate", value: "graduate" },
       { label: "10th", value: "10th" },
+      { label: "12th", value: "12th" },
+      { label: "Graduate", value: "graduate" },
+      { label: "Post Graduate", value: "postGraduate" },
     ],
     isValid: (value: string) => value.trim().length !== 0,
   },
@@ -83,6 +85,9 @@ export const formFields: formField<formValueType>[] = [
     options: [
       { label: "Solution Engineer", value: "solutionEngineer" },
       { label: "Sr Solution Engineer", value: "srSolutionEngineer" },
+      { label: "Associate Team Lead", value: "associateTeamLead" },
+      { label: "Team Lead", value: "teamLead" },
+      { label: "Practice Head", value: "practiceHead" }
     ],
     isValid: (value: string) => value.trim().length !== 0,
   },
@@ -99,7 +104,7 @@ export const formFields: formField<formValueType>[] = [
   },
   {
     id: "profilePic",
-    type: "input",
+    type: "file",
     label: "Upload profile picture",
     attributes: { type: "file" },
     isValid: (value: string) => value.trim().length !== 0,
@@ -111,5 +116,36 @@ export const formFields: formField<formValueType>[] = [
     classes: "bg-blue-200 w-20",
     attributes: { id: "submitButton", type: "submit" },
     isValid: (value: string) => true,
+  },
+];
+
+export const tableHeader: TableHeaderType[] = [
+  {
+    id: "profilePic",
+    colName: "Profile picture",
+  },
+  {
+    id: "name",
+    colName: "Name",
+  },
+  {
+    id: "email",
+    colName: "Email",
+  },
+  {
+    id: "dob",
+    colName: "Date of Birth",
+  },
+  {
+    id: "highestEducation",
+    colName: "Highest Education",
+  },
+  {
+    id: "designation",
+    colName: "Designation",
+  },
+  {
+    id: "delete-action",
+    colName: "Delete",
   },
 ];

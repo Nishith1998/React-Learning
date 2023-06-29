@@ -1,4 +1,8 @@
-export type formField<T> = {
+export type TableHeaderType = {
+  id: string,
+  colName: string,
+}
+export type FormFieldType<T> = {
   id: keyof T;
   type: string;
   label: string;
@@ -9,7 +13,7 @@ export type formField<T> = {
   isValid?: (value: string) => boolean;
 };
 
-export type formValueType = {
+export type FormValueType = {
   firstName: string;
   lastName: string;
   email: string;
