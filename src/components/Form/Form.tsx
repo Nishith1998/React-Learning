@@ -2,7 +2,7 @@ import { Card } from "../UI/Card/Card";
 import { GenericForm } from "../UI/GenericForm/GenericForm";
 import { FORM_FIELDS } from "../../models/constants";
 import { FormFieldType, FormValueType } from "../../models/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // change name of form
 export const Form = (props: { onAddUser: (userInfo: FormValueType) => void; formValue: FormValueType; }) => {
   const onSubmit = (formValue: FormValueType ): void => {
@@ -20,9 +20,6 @@ export const Form = (props: { onAddUser: (userInfo: FormValueType) => void; form
   console.log("Form: formValue: ", props.formValue);
 
   const formFields = FORM_FIELDS.map((fields: FormFieldType<FormValueType>) => {
-    if(fields.type === 'dropdown') {
-      fields.value = fields.options && fields.options?.length !== 0 ? fields.options[0].value : '';
-    } else 
     fields.value = props.formValue[fields.id];
     return fields;
   });

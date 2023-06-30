@@ -9,7 +9,6 @@ export const INITIAL_FORM_VALUE: FormValueType = {
   designation: "",
   gender: "",
   profilePic: "",
-  submitButton: "",
 };
 
 export const FROM_STRUCTURE_INITIAL = {
@@ -17,11 +16,11 @@ export const FROM_STRUCTURE_INITIAL = {
     lastName: {value: '', isValid: null},
     email: {value: '', isValid: null},
     dob: {value: '', isValid: null},
-    highestEducation: {value: '', isValid: null},
-    designation: {value: '', isValid: null},
+    highestEducation: {value: '', isValid: true},
+    designation: {value: '', isValid: true},
     gender: {value: '', isValid: null},
     profilePic: {value: '', isValid: null},
-    submitButton: {value: '', isValid: true},
+    // submitButton: {value: '', isValid: true},
 }
 
 export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
@@ -33,6 +32,8 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
     isValid: (value: string) => {
       return value ? value.trim().length > 3 : false;
     },
+    error: "First name should at least have 4 characters",
+    classes: "grid grid-cols-2 w-40"
   },
   {
     id: "lastName",
@@ -42,6 +43,7 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
     isValid: (value: string) => {
       return value ? value.trim().length > 3 : false;
     },
+    error: "Last name should at least have 4 characters",
   },
   {
     id: "email",
@@ -55,6 +57,7 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
           )
         : false;
     },
+    error: "Email formate is not valid",
   },
   {
     id: "dob",
@@ -62,7 +65,8 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
     label: "DOB",
     attributes: { id: "email", type: "date", placeholder: "dd/mm/yyyy" },
     isValid: (value: string) =>
-      new Date().getFullYear() - new Date(value).getFullYear() > 18,
+      new Date().getFullYear() - new Date(value).getFullYear() >= 18,
+    error: "You should be 18 years old"
   },
   {
     id: "highestEducation",
@@ -75,7 +79,7 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
       { label: "Graduate", value: "graduate" },
       { label: "Post Graduate", value: "postGraduate" },
     ],
-    isValid: (value: string) => value.trim().length !== 0,
+    isValid: (value: string) => true,
   },
   {
     id: "designation",
@@ -87,9 +91,9 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
       { label: "Sr Solution Engineer", value: "srSolutionEngineer" },
       { label: "Associate Team Lead", value: "associateTeamLead" },
       { label: "Team Lead", value: "teamLead" },
-      { label: "Practice Head", value: "practiceHead" }
+      { label: "Practice Head", value: "practiceHead" },
     ],
-    isValid: (value: string) => value.trim().length !== 0,
+    isValid: (value: string) => true,
   },
   {
     id: "gender",

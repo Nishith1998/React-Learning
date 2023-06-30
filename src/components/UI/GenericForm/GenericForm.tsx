@@ -10,23 +10,26 @@ export const GenericForm = (props: {
 }) => {
   const formStructureInitial: FormStructureType<FormValueType> = FROM_STRUCTURE_INITIAL;
   props.formFields.forEach((ele) => {
+    if(ele.type !== "button")
     formStructureInitial[ele.id] = {
-      value: ele.value ?? "",
-      isValid:
-        ele.type === "button" ? true : ele.isValid?.(ele.value ?? "") ?? null,
+      value: ele.value,
+      isValid: ele.value === '' ? null : ele.isValid?.(ele.value ?? "") ?? null,
     };
   });
-  const [form, setForm] = useState<FormStructureType<FormValueType>>(formStructureInitial);
+  const [form, setForm] = useState<FormStructureType<FormValueType>>(FROM_STRUCTURE_INITIAL);
+
+  console.log("GenericForm: form: ", form)
 
   useEffect(() => {
-    const formStructureModified: FormStructureType<FormValueType> = FROM_STRUCTURE_INITIAL;
+    const formStructureModified: FormStructureType<FormValueType> = {...FROM_STRUCTURE_INITIAL};
     props.formFields.forEach((ele) => {
+      // if(ele.type !== "button")
       formStructureModified[ele.id] = {
         value: ele.value ?? "",
         isValid: ele.isValid?.(ele.value ?? "") ?? null,
       };
     });
-    setForm(formStructureModified);
+    setForm(FROM_STRUCTURE_INITIAL);
   }, [props.formFields]);
 
   const onInputChange = (label: string, value: string, isValid: boolean) => {

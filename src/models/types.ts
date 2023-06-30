@@ -11,6 +11,7 @@ export type FormFieldType<T> = {
   classes?: string;
   options?: { label: string; value: string }[];
   isValid?: (value: string) => boolean;
+  error?: string;
 };
 
 export type FormValueType = {
@@ -22,7 +23,7 @@ export type FormValueType = {
   designation: string;
   gender: string;
   profilePic: string;
-  submitButton: string;
+  // submitButton: string;
 } & { [key: string]: any };
 
 export type FormStructureType<T> = {

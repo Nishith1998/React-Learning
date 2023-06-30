@@ -5,6 +5,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   safelist: [
+    "col-span-2"
   ],
   theme: {
     extend: {
