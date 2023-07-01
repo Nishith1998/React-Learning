@@ -20,7 +20,7 @@ export const Radio = (props: {
     props.onInputChangeHandler(label, value, isValid);
   };
   return (
-    <div>
+    <div className={props.classes}>
       <label htmlFor={props.attributes.id}>{props.label}</label>
       <div className="grid grid-cols-2 gap-2">
         {props.options.map((option: { label: string; value: string }) => {

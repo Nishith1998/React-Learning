@@ -33,7 +33,7 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
       return value ? value.trim().length > 3 : false;
     },
     error: "First name should at least have 4 characters",
-    classes: "grid grid-cols-2 w-40"
+    classes: "grid grid-cols-2"
   },
   {
     id: "lastName",
@@ -44,6 +44,8 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
       return value ? value.trim().length > 3 : false;
     },
     error: "Last name should at least have 4 characters",
+    classes: "grid grid-cols-2"
+
   },
   {
     id: "email",
@@ -58,6 +60,8 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
         : false;
     },
     error: "Email formate is not valid",
+    classes: "grid grid-cols-2"
+
   },
   {
     id: "dob",
@@ -66,7 +70,9 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
     attributes: { id: "email", type: "date", placeholder: "dd/mm/yyyy" },
     isValid: (value: string) =>
       new Date().getFullYear() - new Date(value).getFullYear() >= 18,
-    error: "You should be 18 years old"
+    error: "You should be 18 years old",
+    classes: "grid grid-cols-2"
+
   },
   {
     id: "highestEducation",
@@ -80,6 +86,8 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
       { label: "Post Graduate", value: "postGraduate" },
     ],
     isValid: (value: string) => true,
+    classes: "grid grid-cols-2"
+
   },
   {
     id: "designation",
@@ -94,6 +102,8 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
       { label: "Practice Head", value: "practiceHead" },
     ],
     isValid: (value: string) => true,
+    classes: "grid grid-cols-2"
+
   },
   {
     id: "gender",
@@ -105,6 +115,8 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
       { label: "Female", value: "female" },
     ],
     isValid: (value: string) => value.trim().length !== 0,
+    classes: "grid grid-cols-2"
+
   },
   {
     id: "profilePic",
@@ -112,14 +124,18 @@ export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
     label: "Upload profile picture",
     attributes: { type: "file" },
     isValid: (value: string) => value.trim().length !== 0,
+    classes: "grid grid-cols-2"
+
   },
   {
     id: "submitButton",
     type: "button",
     label: "Submit",
-    classes: "bg-blue-200 w-20",
+    // classes: "bg-blue-200 w-20",
     attributes: { id: "submitButton", type: "submit" },
     isValid: (value: string) => true,
+    classes: "flex justify-center w-full"
+
   },
 ];
 

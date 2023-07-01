@@ -12,13 +12,7 @@ export const Dropdown = (props: {
   error: string;
   onInputChangeHandler: (arg0: string, arg1: string, arg2: boolean) => void;
 }) => {
-  const onInputChangeHandler = (
-    label: string,
-    value: string,
-    isValid: boolean
-  ) => {
-    props.onInputChangeHandler(label, value, isValid);
-  };
+  
   return (
     <div className={props.classes}>
       <label htmlFor={props.attributes.id}>{props.label}</label>

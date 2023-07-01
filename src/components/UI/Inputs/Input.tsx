@@ -36,9 +36,9 @@ export const Input = (props: {
             props.form[props.id].isValid === false ? "bg-red-200" : "bg-white"
           }
         ></input>
-      </div>
-      <div className="text-red-500 text-xs">
-        {props.form[props.id].isValid === false && props.error}
+        <div className="text-red-500 text-xs">
+          {props.form[props.id].isValid === false && props.error}
+        </div>
       </div>
     </div>
   );

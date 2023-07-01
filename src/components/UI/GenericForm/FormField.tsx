@@ -1,8 +1,9 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { Input } from "../Inputs/Input";
 import { Dropdown } from "../Inputs/Dropdown";
 import { Radio } from "../Inputs/Radio";
 import { FileUpload } from "../Inputs/FileUpload";
+import { Button } from "../Inputs/Button";
 // import { FormStructureType, FormValueType } from "../../../models/types";
 
 export const FormField = (props: any) => {
@@ -14,15 +15,6 @@ export const FormField = (props: any) => {
     isValid: boolean
   ) => {
     props.onInputChange(label, value, isValid);
-  };
-
-  const isFormValid = () => {
-    console.log("isFormValid: FormValue: ", props.form);
-    return (
-      Object.values(props.form).filter(
-        (ele: any) => ele.isValid === false || ele.isValid === null
-      ).length !== 0
-    );
   };
   // object with keys directly access the value of JSX
   if (props.type === "input") {
@@ -175,16 +167,22 @@ export const FormField = (props: any) => {
     );
   } else if (props.type === "button") {
     formFieldJSX = (
-      <button
-        className={`col-span-2 bg-blue-200 w-20 ${
-          isFormValid() ? "bg-white opacity-70" : ""
-        }`}
-        {...props.attributes}
-        disabled={isFormValid()}
-      >
-        {props.label}
-      </button>
+      <Button 
+        form={props.form}
+        classes={props.classes}
+        label={props.label}
+        attributes={props.attributes}
+      />
+      // <button
+      //   className={`col-span-2 bg-blue-200 w-20 ${
+      //     isFormValid() ? "bg-white opacity-70" : ""
+      //   }`}
+      //   {...props.attributes}
+      //   disabled={isFormValid()}
+      // >
+      //   {props.label}
+      // </button>
     );
   }
-  return <div className="grid grid-cols-2 gap-2 my-2">{formFieldJSX}</div>;
+  return <>{formFieldJSX}</>;
 };
