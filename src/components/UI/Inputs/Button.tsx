@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes } from "react";
-import { FormValueType } from "../../../models/types";
+import { FormStructureType, FormValueType } from "../../../models/types";
 
 export const Button = (props: {
-  form: FormValueType;
+  form: FormStructureType<FormValueType>;
   label: string;
   classes: string;
   attributes: ButtonHTMLAttributes<HTMLButtonElement>;

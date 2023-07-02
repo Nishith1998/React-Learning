@@ -1,4 +1,4 @@
-import { FormFieldType, FormValueType, TableHeaderType } from "./types";
+import { FormFieldType, FormStructureType, FormValueType, TableHeaderType } from "./types";
 
 export const INITIAL_FORM_VALUE: FormValueType = {
   firstName: "",
@@ -11,7 +11,7 @@ export const INITIAL_FORM_VALUE: FormValueType = {
   profilePic: "",
 };
 
-export const FROM_STRUCTURE_INITIAL = {
+export const FROM_STRUCTURE_INITIAL: FormStructureType<FormValueType> = {
     firstName: {value: '', isValid: null},
     lastName: {value: '', isValid: null},
     email: {value: '', isValid: null},

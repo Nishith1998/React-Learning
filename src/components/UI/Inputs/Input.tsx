@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { FormValueType } from "../../../models/types";
+import { FormStructureType, FormValueType } from "../../../models/types";
 
 export const Input = (props: {
   id: string;
@@ -7,7 +7,7 @@ export const Input = (props: {
   classes: string;
   isValid: (arg0: string) => boolean;
   attributes: React.InputHTMLAttributes<any>;
-  form: FormValueType;
+  form: FormStructureType<FormValueType>;
   error: string;
   onInputChangeHandler: (arg0: string, arg1: string, arg2: boolean) => void;
 }) => {
