@@ -45,7 +45,7 @@ export const FileUpload = (props: {
         ></input>
         <div className="absolute flex flex-row z-0">
           <button type="button">Choose a file</button>
-          <div className="pl-4 w-28 truncate">
+          <div className="pl-4 w-20 truncate">
             {props.form[props.id].value.split("#")[0]}
           </div>
         </div>
