@@ -4,11 +4,11 @@ import { FormStructureType, FormValueType } from "../../../models/types";
 export const Input = (props: {
   id: string;
   label: string;
-  classes: string;
-  isValid: (arg0: string) => boolean;
+  classes?: string;
+  isValid?: (arg0: string) => boolean;
   attributes: React.InputHTMLAttributes<any>;
   form: FormStructureType<FormValueType>;
-  error: string;
+  error?: string;
   onInputChangeHandler: (arg0: string, arg1: string, arg2: boolean) => void;
 }) => {
   const onInputChangeHandler = (
@@ -29,7 +29,7 @@ export const Input = (props: {
             onInputChangeHandler(
               props.id,
               event.target.value,
-              props.isValid(event.target.value)
+              props.isValid?.(event.target.value) ?? true
             )
           }
           className={

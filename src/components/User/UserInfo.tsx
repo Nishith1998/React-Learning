@@ -4,46 +4,11 @@ import { FormValueType, TableHeaderType } from "../../models/types";
 import { Card } from "../UI/Card/Card";
 import Table from "@mui/material/Table";
 
-// const MyTable = () => {
-//   const columns = [{ id: "name", label: "Name" }];
-//   const rows = [{ name: "haha" }];
-//   return (
-//     <Table stickyHeader aria-label="sticky table">
-//       <TableHead>
-//         <TableRow>
-//           {columns.map((column) => (
-//             <TableCell
-//               key={column.id}
-//               // align={column.align}
-//               // style={{ minWidth: column.minWidth }}
-//             >
-//               {column.label}
-//             </TableCell>
-//           ))}
-//         </TableRow>
-//       </TableHead>
-//       <TableBody>
-//         {rows
-//           // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-//           .map((row: any) => {
-//             return (
-//               <TableRow hover role="checkbox" tabIndex={-1}>
-//                 {columns.map((column: any) => {
-//                   const value = row[column.id];
-//                   return <TableCell key={column.id}>{value}</TableCell>;
-//                 })}
-//               </TableRow>
-//             );
-//           })}
-//       </TableBody>
-//     </Table>
-//   );
-// };
-
-export const UserInfo = (props: any) => {
-  // const columns = [{ id: "name", label: "Name" }];
-  // const rows = [{ name: "haha" }];
-
+export const UserInfo = (props: {
+  onDelete: (arg0: FormValueType) => void;
+  onEdit: (arg0: FormValueType) => void;
+  userDetails: FormValueType[];
+}) => {
   const deleteHandler = (item: FormValueType) => {
     props.onDelete(item);
   };
@@ -71,25 +36,28 @@ export const UserInfo = (props: any) => {
   return (
     <>
       <Card>
-      <Table stickyHeader aria-label="sticky table">
-        <TableHead>
-          <TableRow>
-            {tableHeader.map((column: TableHeaderType) => (
-              <TableCell
-                key={column.id}
-                // align={column.align}
-                // style={{ minWidth: column.minWidth }}
-              >
-                {column.colName}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.userDetails
-            .map((row: FormValueType) => {
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {tableHeader.map((column: TableHeaderType) => (
+                <TableCell
+                  key={column.id}
+                  // align={column.align}
+                  // style={{ minWidth: column.minWidth }}
+                >
+                  {column.colName}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {props.userDetails.map((row: FormValueType) => {
               return (
-                <TableRow hover onDoubleClick={() => editHandler(row)} key={`row-${row.id}`}>
+                <TableRow
+                  hover
+                  onDoubleClick={() => editHandler(row)}
+                  key={`row-${row.id}`}
+                >
                   {tableHeader.map((column: TableHeaderType) => {
                     return (
                       <TableCell key={column.id} align="center">
@@ -100,10 +68,9 @@ export const UserInfo = (props: any) => {
                 </TableRow>
               );
             })}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
       </Card>
-
     </>
   );
 };

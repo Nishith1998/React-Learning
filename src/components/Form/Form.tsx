@@ -4,18 +4,19 @@ import { FORM_FIELDS } from "../../models/constants";
 import { FormFieldType, FormValueType } from "../../models/types";
 import { useEffect } from "react";
 // change name of form
-export const Form = (props: { onAddUser: (userInfo: FormValueType) => void; formValue: FormValueType; }) => {
-  const onSubmit = (formValue: FormValueType ): void => {
+export const Form = (props: {
+  onAddUser: (userInfo: FormValueType) => void;
+  formValue: FormValueType;
+}) => {
+  const onSubmit = (formValue: FormValueType): void => {
     console.log(formValue);
     props.onAddUser({
       ...formValue,
-      name: formValue.firstName + formValue.lastName,
+      name: formValue.firstName + " " + formValue.lastName,
     });
   };
 
-  useEffect(() => {
-
-  },[props.formValue])
+  useEffect(() => {}, [props.formValue]);
 
   console.log("Form: formValue: ", props.formValue);
 

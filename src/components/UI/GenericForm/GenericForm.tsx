@@ -55,7 +55,14 @@ export const GenericForm = (props: {
           <FormField
             key={field.id}
             form={form}
-            {...field}
+            id={String(field.id)}
+            type={field.type}
+            label={field.label}
+            classes={field.classes}
+            attributes={field.attributes}
+            isValid={field.isValid}
+            error={field.error}
+            options={field.options}
             onInputChange={onInputChange}
           />
         ))}

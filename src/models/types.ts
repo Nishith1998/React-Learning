@@ -23,7 +23,6 @@ export type FormValueType = {
   designation: string;
   gender: string;
   profilePic: string;
-  // submitButton: string;
 } & { [key: string]: any };
 
 export type FormStructureType<T> = {

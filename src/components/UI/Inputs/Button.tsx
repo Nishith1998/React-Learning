@@ -4,7 +4,7 @@ import { FormStructureType, FormValueType } from "../../../models/types";
 export const Button = (props: {
   form: FormStructureType<FormValueType>;
   label: string;
-  classes: string;
+  classes?: string;
   attributes: ButtonHTMLAttributes<HTMLButtonElement>;
 }) => {
   const isFormValid = () => {
