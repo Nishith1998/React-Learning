@@ -4,10 +4,12 @@ import { FormField } from "./FormField";
 import { Card } from "../Card/Card";
 import { FROM_STRUCTURE_INITIAL, INITIAL_FORM_VALUE } from "../../../models/constants";
 
-export const GenericForm = (props: {
-  formFields: GenericFormField<FormValue>[],
-  onSubmit: ((formValue: FormValue) => void)
-}) => {
+type GenericFormProps = {
+  formFields: GenericFormField<FormValue>[];
+  onSubmit: ((formValue: FormValue) => void);
+};
+
+export const GenericForm = (props: GenericFormProps) => {
   const formStructureInitial: FormStructure<FormValue> = FROM_STRUCTURE_INITIAL;
   props.formFields.forEach((ele) => {
     if(ele.type !== "button")
@@ -17,8 +19,6 @@ export const GenericForm = (props: {
     };
   });
   const [form, setForm] = useState<FormStructure<FormValue>>(FROM_STRUCTURE_INITIAL);
-
-  console.log("GenericForm: form: ", form)
 
   useEffect(() => {
     const formStructureModified: FormStructure<FormValue> = {...FROM_STRUCTURE_INITIAL};

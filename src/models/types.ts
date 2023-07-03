@@ -1,12 +1,19 @@
 export type TableHeaderType = {
-  id: string,
-  colName: string,
-}
+  id: string;
+  colName: string;
+};
+
+export type InputAttributes = {
+  id?: string;
+  type?: string;
+  placeholder?: string;
+};
+
 export type GenericFormField<T> = {
   id: keyof T;
   type: string;
   label: string;
-  attributes: React.InputHTMLAttributes<any>;
+  attributes: InputAttributes;
   value?: string;
   classes?: string;
   options?: { label: string; value: string }[];
@@ -26,5 +33,5 @@ export type FormValue = {
 } & { [key: string]: any };
 
 export type FormStructure<T> = {
-  [k in keyof T]: {value: T[k], isValid: boolean | null}
-} & { [key: string]: any }
+  [k in keyof T]: { value: T[k]; isValid: boolean | null };
+} & { [key: string]: any };

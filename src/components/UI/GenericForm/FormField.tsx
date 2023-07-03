@@ -4,30 +4,48 @@ import { Radio } from "../Inputs/Radio";
 import { FileUpload } from "../Inputs/FileUpload";
 import { Button } from "../Inputs/Button";
 import { ReactNode } from "react";
-import { FormStructure, FormValue } from "../../../models/types";
+import { FormStructure, FormValue, InputAttributes } from "../../../models/types";
 
-export const FormField = (props: {
+type FormFieldProps = {
   id: string;
   label: string;
-  classes?: string;
-  attributes: any;
+  type: string;
+  attributes: InputAttributes;
   form: FormStructure<FormValue>;
-  isValid?: (arg0: string) => boolean;
+  isValid?: (fieldValue: string) => boolean;
+  classes?: string;
   error?: string;
-  options?: { label: string; value: string }[];
-  onInputChange: (arg0: string, arg1: string, arg2: boolean) => void;
-  type: string | number;
-}) => {
+  options?: {
+    label: string;
+    value: string;
+  }[];
+  onInputChange: (label: string, value: string, isValid: boolean) => void;
+};
+
+const isButtonAttribute = (x: any): x is {id?: string, type: 'submit' | 'button'} => x.type === 'submit' || x.type === 'button'
+
+export const FormField = (props: FormFieldProps) => {
+
+  const isFormValid = () => {
+    return (
+      Object.values(props.form).filter(
+        (ele: any) => ele.isValid === false || ele.isValid === null
+      ).length !== 0
+    );
+  };
+
+
   const inputFieldMapper: { [key: string]: () => ReactNode } = {
     input: () => (
       <Input
         id={props.id}
         label={props.label}
         attributes={{ ...props.attributes }}
-        form={props.form}
+        value={props.form[props.id].value}
         onInputChangeHandler={onInputChangeHandler}
         classes={props.classes}
-        isValid={props.isValid}
+        checkValid={props.isValid}
+        isValid={props.form[props.id].isValid}
         error={props.error}
       />
     ),
@@ -39,7 +57,7 @@ export const FormField = (props: {
         classes={props.classes}
         attributes={{ ...props.attributes }}
         form={props.form}
-        isValid={props.isValid}
+        isValid={props.isValid?.bind(this)}
         options={props.options ?? []}
         onInputChangeHandler={onInputChangeHandler}
         error={props.error}
@@ -78,7 +96,8 @@ export const FormField = (props: {
         form={props.form}
         classes={props.classes}
         label={props.label}
-        attributes={props.attributes}
+        isFormValid={isFormValid}
+        attributes={ isButtonAttribute(props.attributes) ? props.attributes : {id: 'as', type: 'button'}}
       />
     ),
   };
@@ -90,6 +109,6 @@ export const FormField = (props: {
   ) => {
     props.onInputChange(label, value, isValid);
   };
-  
+
   return <>{inputFieldMapper[props.type]()}</>;
 };

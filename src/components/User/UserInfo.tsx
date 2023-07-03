@@ -5,11 +5,13 @@ import { Card } from "../UI/Card/Card";
 import Table from "@mui/material/Table";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export const UserInfo = (props: {
+type UserInfoProps = {
   onDelete: (arg0: FormValue) => void;
   onEdit: (arg0: FormValue) => void;
   userDetails: FormValue[];
-}) => {
+};
+
+export const UserInfo = (props: UserInfoProps) => {
   const deleteHandler = (item: FormValue) => {
     props.onDelete(item);
   };

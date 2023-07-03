@@ -1,28 +1,26 @@
-import { ButtonHTMLAttributes } from "react";
 import { FormStructure, FormValue } from "../../../models/types";
 
-export const Button = (props: {
+type ButtonProps = {
   form: FormStructure<FormValue>;
   label: string;
   classes?: string;
-  attributes: ButtonHTMLAttributes<HTMLButtonElement>;
-}) => {
-  const isFormValid = () => {
-    return (
-      Object.values(props.form).filter(
-        (ele: any) => ele.isValid === false || ele.isValid === null
-      ).length !== 0
-    );
+  isFormValid: () => boolean;
+  attributes: {
+    id?: string;
+    type: "submit" | "button";
   };
+};
 
+export const Button = (props: ButtonProps) => {
   return (
     <div className={props.classes}>
       <button
-        {...props.attributes}
+        id={props.attributes.id}
+        type={props.attributes.type}
         className={`col-span-2 bg-blue-200 w-20 ${
-          isFormValid() ? "bg-white opacity-70" : ""
+          props.isFormValid() ? "bg-white opacity-70" : ""
         }`}
-        disabled={isFormValid()}
+        disabled={props.isFormValid()}
       >
         {props.label}
       </button>

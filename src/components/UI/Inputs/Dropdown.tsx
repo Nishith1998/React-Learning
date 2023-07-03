@@ -1,17 +1,22 @@
 import { ChangeEvent } from "react";
-import { FormStructure, FormValue } from "../../../models/types";
+import { FormStructure, FormValue, InputAttributes } from "../../../models/types";
 
-export const Dropdown = (props: {
+type DropDownProps = {
   id: string;
   label: string;
   classes?: string;
-  isValid?: (arg0: string) => boolean;
-  attributes: React.InputHTMLAttributes<any>;
-  options: { label: string; value: string }[];
+  isValid?: (dropDownValue: string) => boolean;
+  attributes: InputAttributes;
+  options: {
+    label: string;
+    value: string;
+  }[];
   form: FormStructure<FormValue>;
   error?: string;
-  onInputChangeHandler: (arg0: string, arg1: string, arg2: boolean) => void;
-}) => {
+  onInputChangeHandler: (label: string, value: string, isValid: boolean) => void;
+};
+
+export const Dropdown = (props: DropDownProps) => {
   
   return (
     <div className={props.classes}>

@@ -1,16 +1,19 @@
 import { ChangeEvent } from "react";
-import { FormStructure, FormValue } from "../../../models/types";
+import { InputAttributes } from "../../../models/types";
 
-export const Input = (props: {
+type InputProps = {
   id: string;
   label: string;
+  isValid: boolean;
+  attributes: InputAttributes;
+  value: string;
   classes?: string;
-  isValid?: (arg0: string) => boolean;
-  attributes: React.InputHTMLAttributes<any>;
-  form: FormStructure<FormValue>;
   error?: string;
-  onInputChangeHandler: (arg0: string, arg1: string, arg2: boolean) => void;
-}) => {
+  checkValid?: (inputValue: string) => boolean;
+  onInputChangeHandler: (label: string, value: string, isValid: boolean) => void;
+};
+
+export const Input = (props: InputProps) => {
   const onInputChangeHandler = (
     label: string,
     value: string,
@@ -24,20 +27,20 @@ export const Input = (props: {
       <div>
         <input
           {...props.attributes}
-          value={props.form[props.id].value}
+          value={props.value}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             onInputChangeHandler(
               props.id,
               event.target.value,
-              props.isValid?.(event.target.value) ?? true
+              props.checkValid?.(event.target.value) ?? true
             )
           }
           className={
-            props.form[props.id].isValid === false ? "bg-red-200" : "bg-white w-full"
+            props.isValid === false ? "bg-red-200" : "bg-white w-full"
           }
         ></input>
         <div className="text-red-500 text-xs">
-          {props.form[props.id].isValid === false && props.error}
+          {props.isValid === false && props.error}
         </div>
       </div>
     </div>

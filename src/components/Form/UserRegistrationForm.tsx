@@ -4,10 +4,12 @@ import { FORM_FIELDS } from "../../models/constants";
 import { GenericFormField, FormValue } from "../../models/types";
 import { useEffect } from "react";
 
-export const UserRegistrationForm = (props: {
+type UserRegistrationFormProps = {
   onAddUser: (userInfo: FormValue) => void;
   formValue: FormValue;
-}) => {
+};
+
+export const UserRegistrationForm = (props: UserRegistrationFormProps) => {
   const onSubmit = (formValue: FormValue): void => {
     console.log(formValue);
     props.onAddUser({
