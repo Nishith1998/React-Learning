@@ -82,8 +82,8 @@ export const FORM_FIELDS: GenericFormField<FormValue>[] = [
     options: [
       { label: "10th", value: "10th" },
       { label: "12th", value: "12th" },
-      { label: "Graduate", value: "graduate" },
-      { label: "Post Graduate", value: "postGraduate" },
+      { label: "Graduate", value: "Graduate" },
+      { label: "Post Graduate", value: "Post Graduate" },
     ],
     isValid: (value: string) => true,
     classes: "grid grid-cols-2 my-2"
@@ -95,11 +95,11 @@ export const FORM_FIELDS: GenericFormField<FormValue>[] = [
     label: "Designation",
     attributes: { id: "designation" },
     options: [
-      { label: "Solution Engineer", value: "solutionEngineer" },
-      { label: "Sr Solution Engineer", value: "srSolutionEngineer" },
-      { label: "Associate Team Lead", value: "associateTeamLead" },
-      { label: "Team Lead", value: "teamLead" },
-      { label: "Practice Head", value: "practiceHead" },
+      { label: "Solution Engineer", value: "Solution Engineer" },
+      { label: "Sr Solution Engineer", value: "Sr Solution Engineer" },
+      { label: "Associate Team Lead", value: "Associate Team Lead" },
+      { label: "Team Lead", value: "Team Lead" },
+      { label: "Practice Head", value: "Practice Head" },
     ],
     isValid: (value: string) => true,
     classes: "grid grid-cols-2 my-2"

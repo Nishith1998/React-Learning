@@ -1,9 +1,17 @@
-import { TableBody, TableCell, TableHead, TableRow, Tooltip } from "@mui/material";
+import {
+  Menu,
+  MenuItem,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { tableHeader } from "../../models/constants";
 import { FormValue, TableHeaderType } from "../../models/types";
 import { Card } from "../UI/Card/Card";
 import Table from "@mui/material/Table";
-import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useState } from "react";
 
 type UserInfoProps = {
   onDelete: (arg0: FormValue) => void;
@@ -12,12 +20,26 @@ type UserInfoProps = {
 };
 
 export const UserInfo = (props: UserInfoProps) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
   const deleteHandler = (item: FormValue) => {
     props.onDelete(item);
+    setAnchorEl(null);
   };
 
   const editHandler = (item: FormValue) => {
     props.onEdit(item);
+    setAnchorEl(null);
+  };
+
+  const handleClickOnMoreVert = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = (): void => {
+    setAnchorEl(null);
   };
 
   const cellDataJSX = (colHeader: TableHeaderType, userInfo: FormValue) => {
@@ -30,7 +52,22 @@ export const UserInfo = (props: UserInfoProps) => {
         ></img>
       );
     } else if (colHeader.id === "delete-action") {
-      return <button onClick={() => deleteHandler(userInfo)}><DeleteIcon /></button>;
+      return (
+        <>
+          <button onClick={handleClickOnMoreVert}>
+            <MoreVertIcon />
+          </button>
+          <Menu
+            id="basic-menu"
+            open={open}
+            onClose={handleCloseMenu}
+            anchorEl={anchorEl}
+          >
+            <MenuItem onClick={() => editHandler(userInfo)}>Edit</MenuItem>
+            <MenuItem onClick={() => deleteHandler(userInfo)}>Delete</MenuItem>
+          </Menu>
+        </>
+      );
     } else {
       return <span className="truncate">{userInfo[colHeader.id]}</span>;
     }
@@ -57,10 +94,8 @@ export const UserInfo = (props: UserInfoProps) => {
           <TableBody>
             {props.userDetails.map((row: FormValue) => {
               return (
-                <Tooltip title="double click to edit">
                 <TableRow
                   hover
-                  onDoubleClick={() => editHandler(row)}
                   key={`row-${row.id}`}
                 >
                   {tableHeader.map((column: TableHeaderType) => {
@@ -71,7 +106,6 @@ export const UserInfo = (props: UserInfoProps) => {
                     );
                   })}
                 </TableRow>
-                </Tooltip>
               );
             })}
           </TableBody>
