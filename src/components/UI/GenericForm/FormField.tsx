@@ -90,6 +90,6 @@ export const FormField = (props: {
   ) => {
     props.onInputChange(label, value, isValid);
   };
-  // object with keys directly access the value of JSX
+  
   return <>{inputFieldMapper[props.type]()}</>;
 };

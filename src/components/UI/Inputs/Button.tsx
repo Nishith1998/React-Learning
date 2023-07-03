@@ -8,7 +8,6 @@ export const Button = (props: {
   attributes: ButtonHTMLAttributes<HTMLButtonElement>;
 }) => {
   const isFormValid = () => {
-    console.log("isFormValid: FormValue: ", props.form);
     return (
       Object.values(props.form).filter(
         (ele: any) => ele.isValid === false || ele.isValid === null

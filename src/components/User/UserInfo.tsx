@@ -1,8 +1,9 @@
-import { TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { TableBody, TableCell, TableHead, TableRow, Tooltip } from "@mui/material";
 import { tableHeader } from "../../models/constants";
 import { FormValue, TableHeaderType } from "../../models/types";
 import { Card } from "../UI/Card/Card";
 import Table from "@mui/material/Table";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const UserInfo = (props: {
   onDelete: (arg0: FormValue) => void;
@@ -27,7 +28,7 @@ export const UserInfo = (props: {
         ></img>
       );
     } else if (colHeader.id === "delete-action") {
-      return <button onClick={() => deleteHandler(userInfo)}>delete</button>;
+      return <button onClick={() => deleteHandler(userInfo)}><DeleteIcon /></button>;
     } else {
       return <span className="truncate">{userInfo[colHeader.id]}</span>;
     }
@@ -35,8 +36,9 @@ export const UserInfo = (props: {
 
   return (
     <>
-      <Card>
-        <Table stickyHeader aria-label="sticky table">
+      <Card className="bg-slate-100">
+        <div className="text-lg text-center">Users Details</div>
+        <Table stickyHeader aria-label="sticky table" className="bg-blue-50">
           <TableHead>
             <TableRow>
               {tableHeader.map((column: TableHeaderType) => (
@@ -53,6 +55,7 @@ export const UserInfo = (props: {
           <TableBody>
             {props.userDetails.map((row: FormValue) => {
               return (
+                <Tooltip title="double click to edit">
                 <TableRow
                   hover
                   onDoubleClick={() => editHandler(row)}
@@ -66,6 +69,7 @@ export const UserInfo = (props: {
                     );
                   })}
                 </TableRow>
+                </Tooltip>
               );
             })}
           </TableBody>

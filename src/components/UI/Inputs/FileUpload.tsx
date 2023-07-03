@@ -40,7 +40,7 @@ export const FileUpload = (props: {
           }}
           className={
             "opacity-0 absolute z-10 " +
-            (props.form[props.id].isValid === false ? "bg-red-200" : "bg-white")
+            (props.form[props.id].isValid === false ? "bg-red-200" : "bg-white w-full")
           }
         ></input>
         <div className="absolute flex flex-row z-0">

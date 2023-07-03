@@ -18,6 +18,7 @@ export const Dropdown = (props: {
       <label htmlFor={props.attributes.id}>{props.label}</label>
       <div>
         <select
+        className="w-full"
           {...props.attributes}
           value={
             props.form[props.id].value === ""

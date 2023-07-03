@@ -33,7 +33,7 @@ export const Input = (props: {
             )
           }
           className={
-            props.form[props.id].isValid === false ? "bg-red-200" : "bg-white"
+            props.form[props.id].isValid === false ? "bg-red-200" : "bg-white w-full"
           }
         ></input>
         <div className="text-red-500 text-xs">

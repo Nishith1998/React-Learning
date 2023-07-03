@@ -3,8 +3,8 @@ import { GenericForm } from "../UI/GenericForm/GenericForm";
 import { FORM_FIELDS } from "../../models/constants";
 import { GenericFormField, FormValue } from "../../models/types";
 import { useEffect } from "react";
-// change name of form
-export const Form = (props: {
+
+export const UserRegistrationForm = (props: {
   onAddUser: (userInfo: FormValue) => void;
   formValue: FormValue;
 }) => {
@@ -17,9 +17,7 @@ export const Form = (props: {
   };
 
   useEffect(() => {}, [props.formValue]);
-
-  console.log("Form: formValue: ", props.formValue);
-
+  
   const formFields = FORM_FIELDS.map((fields: GenericFormField<FormValue>) => {
     fields.value = props.formValue[fields.id];
     return fields;
@@ -27,6 +25,7 @@ export const Form = (props: {
 
   return (
     <Card className="flex-col bg-slate-50">
+      <div className="text-lg text-center w-full">Registration Form</div>
       <GenericForm formFields={formFields} onSubmit={onSubmit} />
     </Card>
   );

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "../Form/Form";
+import { UserRegistrationForm } from "../Form/UserRegistrationForm";
 import { UserInfo } from "../User/UserInfo";
 import { FormValue } from "../../models/types";
 import { INITIAL_FORM_VALUE } from "../../models/constants";
@@ -33,13 +33,12 @@ export const Dashboard = () => {
   };
 
   const onEditHandler = (item: FormValue) => {
-    console.log("edit", item);
     setCurrentUserFormValue(item);
   };
 
   return (
     <>
-      <Form formValue={currentUserFormValue} onAddUser={addUserHandler} />
+      <UserRegistrationForm formValue={currentUserFormValue} onAddUser={addUserHandler} />
       {userDetails.length !== 0 && (
         <UserInfo
           userDetails={userDetails}

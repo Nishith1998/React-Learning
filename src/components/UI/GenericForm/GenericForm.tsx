@@ -23,7 +23,6 @@ export const GenericForm = (props: {
   useEffect(() => {
     const formStructureModified: FormStructure<FormValue> = {...FROM_STRUCTURE_INITIAL};
     props.formFields.forEach((ele) => {
-      // if(ele.type !== "button")
       formStructureModified[ele.id] = {
         value: ele.value ?? "",
         isValid: ele.isValid?.(ele.value ?? "") ?? null,
@@ -49,7 +48,7 @@ export const GenericForm = (props: {
   };
 
   return (
-    <Card>
+    <Card className="!pb-0">
       <form onSubmit={submitHandler}>
         {props.formFields.map((field: GenericFormField<FormValue>) => (
           <FormField
