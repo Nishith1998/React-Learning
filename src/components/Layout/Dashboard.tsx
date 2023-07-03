@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Form } from "../Form/Form";
 import { UserInfo } from "../User/UserInfo";
-import { FormValueType } from "../../models/types";
+import { FormValue } from "../../models/types";
 import { INITIAL_FORM_VALUE } from "../../models/constants";
 
 export const Dashboard = () => {
-  const [userDetails, setUserDetails] = useState<FormValueType[]>([]);
+  const [userDetails, setUserDetails] = useState<FormValue[]>([]);
   const [currentUserFormValue, setCurrentUserFormValue] =
-    useState<FormValueType>(INITIAL_FORM_VALUE);
+    useState<FormValue>(INITIAL_FORM_VALUE);
 
-  const addUserHandler = (userInfo: FormValueType) => {
+  const addUserHandler = (userInfo: FormValue) => {
     setUserDetails((prevState) => {
       const indexOfItem = userDetails.findIndex(
         (ele) => ele.email === userInfo.email
@@ -24,7 +24,7 @@ export const Dashboard = () => {
     setCurrentUserFormValue(INITIAL_FORM_VALUE);
   };
 
-  const onDeleteHandler = (item: FormValueType) => {
+  const onDeleteHandler = (item: FormValue) => {
     setUserDetails((prevState) => {
       let indexOfItem = prevState.findIndex((ele) => ele.email === item.email);
       prevState.splice(indexOfItem, 1);
@@ -32,7 +32,7 @@ export const Dashboard = () => {
     });
   };
 
-  const onEditHandler = (item: FormValueType) => {
+  const onEditHandler = (item: FormValue) => {
     console.log("edit", item);
     setCurrentUserFormValue(item);
   };

@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { FormStructureType, FormValueType } from "../../../models/types";
+import { FormStructure, FormValue } from "../../../models/types";
 
 export const Radio = (props: {
   id: string;
@@ -8,7 +8,7 @@ export const Radio = (props: {
   isValid?: (arg0: string) => boolean;
   attributes: React.InputHTMLAttributes<any>;
   options: { label: string; value: string }[];
-  form: FormStructureType<FormValueType>;
+  form: FormStructure<FormValue>;
   error?: string;
   onInputChangeHandler: (arg0: string, arg1: string, arg2: boolean) => void;
 }) => {

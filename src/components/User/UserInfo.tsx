@@ -1,23 +1,23 @@
 import { TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { tableHeader } from "../../models/constants";
-import { FormValueType, TableHeaderType } from "../../models/types";
+import { FormValue, TableHeaderType } from "../../models/types";
 import { Card } from "../UI/Card/Card";
 import Table from "@mui/material/Table";
 
 export const UserInfo = (props: {
-  onDelete: (arg0: FormValueType) => void;
-  onEdit: (arg0: FormValueType) => void;
-  userDetails: FormValueType[];
+  onDelete: (arg0: FormValue) => void;
+  onEdit: (arg0: FormValue) => void;
+  userDetails: FormValue[];
 }) => {
-  const deleteHandler = (item: FormValueType) => {
+  const deleteHandler = (item: FormValue) => {
     props.onDelete(item);
   };
 
-  const editHandler = (item: FormValueType) => {
+  const editHandler = (item: FormValue) => {
     props.onEdit(item);
   };
 
-  const cellDataJSX = (colHeader: TableHeaderType, userInfo: FormValueType) => {
+  const cellDataJSX = (colHeader: TableHeaderType, userInfo: FormValue) => {
     if (colHeader.id === "profilePic") {
       return (
         <img
@@ -51,7 +51,7 @@ export const UserInfo = (props: {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.userDetails.map((row: FormValueType) => {
+            {props.userDetails.map((row: FormValue) => {
               return (
                 <TableRow
                   hover

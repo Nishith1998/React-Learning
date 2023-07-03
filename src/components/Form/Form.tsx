@@ -1,14 +1,14 @@
 import { Card } from "../UI/Card/Card";
 import { GenericForm } from "../UI/GenericForm/GenericForm";
 import { FORM_FIELDS } from "../../models/constants";
-import { FormFieldType, FormValueType } from "../../models/types";
+import { GenericFormField, FormValue } from "../../models/types";
 import { useEffect } from "react";
 // change name of form
 export const Form = (props: {
-  onAddUser: (userInfo: FormValueType) => void;
-  formValue: FormValueType;
+  onAddUser: (userInfo: FormValue) => void;
+  formValue: FormValue;
 }) => {
-  const onSubmit = (formValue: FormValueType): void => {
+  const onSubmit = (formValue: FormValue): void => {
     console.log(formValue);
     props.onAddUser({
       ...formValue,
@@ -20,7 +20,7 @@ export const Form = (props: {
 
   console.log("Form: formValue: ", props.formValue);
 
-  const formFields = FORM_FIELDS.map((fields: FormFieldType<FormValueType>) => {
+  const formFields = FORM_FIELDS.map((fields: GenericFormField<FormValue>) => {
     fields.value = props.formValue[fields.id];
     return fields;
   });

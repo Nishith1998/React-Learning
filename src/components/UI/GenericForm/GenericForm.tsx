@@ -1,14 +1,14 @@
 import { FormEvent, useEffect, useState } from "react";
-import { FormStructureType, FormFieldType, FormValueType } from "../../../models/types";
+import { FormStructure, GenericFormField, FormValue } from "../../../models/types";
 import { FormField } from "./FormField";
 import { Card } from "../Card/Card";
 import { FROM_STRUCTURE_INITIAL, INITIAL_FORM_VALUE } from "../../../models/constants";
 
 export const GenericForm = (props: {
-  formFields: FormFieldType<FormValueType>[],
-  onSubmit: ((formValue: FormValueType) => void)
+  formFields: GenericFormField<FormValue>[],
+  onSubmit: ((formValue: FormValue) => void)
 }) => {
-  const formStructureInitial: FormStructureType<FormValueType> = FROM_STRUCTURE_INITIAL;
+  const formStructureInitial: FormStructure<FormValue> = FROM_STRUCTURE_INITIAL;
   props.formFields.forEach((ele) => {
     if(ele.type !== "button")
     formStructureInitial[ele.id] = {
@@ -16,12 +16,12 @@ export const GenericForm = (props: {
       isValid: ele.value === '' ? null : ele.isValid?.(ele.value ?? "") ?? null,
     };
   });
-  const [form, setForm] = useState<FormStructureType<FormValueType>>(FROM_STRUCTURE_INITIAL);
+  const [form, setForm] = useState<FormStructure<FormValue>>(FROM_STRUCTURE_INITIAL);
 
   console.log("GenericForm: form: ", form)
 
   useEffect(() => {
-    const formStructureModified: FormStructureType<FormValueType> = {...FROM_STRUCTURE_INITIAL};
+    const formStructureModified: FormStructure<FormValue> = {...FROM_STRUCTURE_INITIAL};
     props.formFields.forEach((ele) => {
       // if(ele.type !== "button")
       formStructureModified[ele.id] = {
@@ -40,7 +40,7 @@ export const GenericForm = (props: {
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formValueMapped: FormValueType = {...INITIAL_FORM_VALUE};
+    const formValueMapped: FormValue = {...INITIAL_FORM_VALUE};
     for (let item in form) {
       formValueMapped[item] = form[item].value;
     }
@@ -51,7 +51,7 @@ export const GenericForm = (props: {
   return (
     <Card>
       <form onSubmit={submitHandler}>
-        {props.formFields.map((field: FormFieldType<FormValueType>) => (
+        {props.formFields.map((field: GenericFormField<FormValue>) => (
           <FormField
             key={field.id}
             form={form}

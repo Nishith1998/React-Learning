@@ -3,15 +3,15 @@ import { Dropdown } from "../Inputs/Dropdown";
 import { Radio } from "../Inputs/Radio";
 import { FileUpload } from "../Inputs/FileUpload";
 import { Button } from "../Inputs/Button";
-import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
-import { FormStructureType, FormValueType } from "../../../models/types";
+import { ReactNode } from "react";
+import { FormStructure, FormValue } from "../../../models/types";
 
 export const FormField = (props: {
   id: string;
   label: string;
   classes?: string;
   attributes: any;
-  form: FormStructureType<FormValueType>;
+  form: FormStructure<FormValue>;
   isValid?: (arg0: string) => boolean;
   error?: string;
   options?: { label: string; value: string }[];

@@ -2,7 +2,7 @@ export type TableHeaderType = {
   id: string,
   colName: string,
 }
-export type FormFieldType<T> = {
+export type GenericFormField<T> = {
   id: keyof T;
   type: string;
   label: string;
@@ -14,7 +14,7 @@ export type FormFieldType<T> = {
   error?: string;
 };
 
-export type FormValueType = {
+export type FormValue = {
   firstName: string;
   lastName: string;
   email: string;
@@ -25,6 +25,6 @@ export type FormValueType = {
   profilePic: string;
 } & { [key: string]: any };
 
-export type FormStructureType<T> = {
+export type FormStructure<T> = {
   [k in keyof T]: {value: T[k], isValid: boolean | null}
 } & { [key: string]: any }

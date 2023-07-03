@@ -1,6 +1,6 @@
-import { FormFieldType, FormStructureType, FormValueType, TableHeaderType } from "./types";
+import { GenericFormField, FormStructure, FormValue, TableHeaderType } from "./types";
 
-export const INITIAL_FORM_VALUE: FormValueType = {
+export const INITIAL_FORM_VALUE: FormValue = {
   firstName: "",
   lastName: "",
   email: "",
@@ -11,7 +11,7 @@ export const INITIAL_FORM_VALUE: FormValueType = {
   profilePic: "",
 };
 
-export const FROM_STRUCTURE_INITIAL: FormStructureType<FormValueType> = {
+export const FROM_STRUCTURE_INITIAL: FormStructure<FormValue> = {
     firstName: {value: '', isValid: null},
     lastName: {value: '', isValid: null},
     email: {value: '', isValid: null},
@@ -23,7 +23,7 @@ export const FROM_STRUCTURE_INITIAL: FormStructureType<FormValueType> = {
     // submitButton: {value: '', isValid: true},
 }
 
-export const FORM_FIELDS: FormFieldType<FormValueType>[] = [
+export const FORM_FIELDS: GenericFormField<FormValue>[] = [
   {
     id: "firstName",
     type: "input",
