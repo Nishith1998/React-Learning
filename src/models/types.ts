@@ -33,5 +33,5 @@ export type FormValue = {
 } & { [key: string]: any };
 
 export type FormStructure<T> = {
-  [k in keyof T]: { value: T[k]; isValid: boolean | null };
+  [k in keyof T]: { value: T[k]; isValid: boolean | null; isTouched: boolean };
 } & { [key: string]: any };

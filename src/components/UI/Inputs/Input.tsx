@@ -4,45 +4,39 @@ import { InputAttributes } from "../../../models/types";
 type InputProps = {
   id: string;
   label: string;
-  isValid: boolean;
   attributes: InputAttributes;
   value: string;
   classes?: string;
   error?: string;
-  checkValid?: (inputValue: string) => boolean;
-  onInputChangeHandler: (label: string, value: string, isValid: boolean) => void;
+  onInputChangeHandler: (
+    value: string,
+  ) => void;
+  onInputBlurHandler: () => void;
 };
 
 export const Input = (props: InputProps) => {
-  const onInputChangeHandler = (
-    label: string,
-    value: string,
-    isValid: boolean
-  ) => {
-    props.onInputChangeHandler(label, value, isValid);
-  };
+  const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
+    props.onInputChangeHandler(
+      event.target.value,
+    );
+
   return (
-    <div className={props.classes}>
+    <>
       <label htmlFor={props.attributes.id}>{props.label}</label>
       <div>
         <input
-          {...props.attributes}
+          id={props.attributes.id}
+          type={props.attributes.type}
+          placeholder={props.attributes.placeholder}
           value={props.value}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            onInputChangeHandler(
-              props.id,
-              event.target.value,
-              props.checkValid?.(event.target.value) ?? true
-            )
-          }
-          className={
-            props.isValid === false ? "bg-red-200" : "bg-white w-full"
-          }
+          onChange={inputChangeHandler}
+          onBlur={props.onInputBlurHandler}
+          className={props.classes}
         ></input>
         <div className="text-red-500 text-xs">
-          {props.isValid === false && props.error}
+          {props.error !== '' && props.error}
         </div>
       </div>
-    </div>
+    </>
   );
 };

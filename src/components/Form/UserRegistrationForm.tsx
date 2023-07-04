@@ -20,15 +20,15 @@ export const UserRegistrationForm = (props: UserRegistrationFormProps) => {
 
   useEffect(() => {}, [props.formValue]);
   
-  const formFields = FORM_FIELDS.map((fields: GenericFormField<FormValue>) => {
-    fields.value = props.formValue[fields.id];
-    return fields;
-  });
+  // const formFields = FORM_FIELDS.map((fields: GenericFormField<FormValue>) => {
+  //   fields.value = props.formValue[fields.id];
+  //   return fields;
+  // });
 
   return (
     <Card className="flex-col bg-slate-50">
       <div className="text-lg text-center w-full">Registration Form</div>
-      <GenericForm formFields={formFields} onSubmit={onSubmit} />
+      <GenericForm formFields={FORM_FIELDS} onSubmit={onSubmit} />
     </Card>
   );
 };

@@ -14,8 +14,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 
 type UserInfoProps = {
-  onDelete: (arg0: FormValue) => void;
-  onEdit: (arg0: FormValue) => void;
+  onDelete: (userDetail: FormValue) => void;
+  onEdit: (userDetail: FormValue) => void;
   userDetails: FormValue[];
 };
 

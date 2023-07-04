@@ -1,42 +1,33 @@
 import { ChangeEvent } from "react";
-import { FormStructure, FormValue, InputAttributes } from "../../../models/types";
+import { InputAttributes } from "../../../models/types";
 
 type DropDownProps = {
   id: string;
   label: string;
   classes?: string;
-  isValid?: (dropDownValue: string) => boolean;
+  value: string;
   attributes: InputAttributes;
   options: {
     label: string;
     value: string;
   }[];
-  form: FormStructure<FormValue>;
   error?: string;
-  onInputChangeHandler: (label: string, value: string, isValid: boolean) => void;
+  onInputChangeHandler: (value: string) => void;
 };
 
 export const Dropdown = (props: DropDownProps) => {
-  
+  const dropDownChangeHandler = (event: ChangeEvent<HTMLSelectElement>) =>
+    props.onInputChangeHandler(event.target.value);
+
   return (
-    <div className={props.classes}>
+    <>
       <label htmlFor={props.attributes.id}>{props.label}</label>
       <div>
         <select
-        className="w-full"
-          {...props.attributes}
-          value={
-            props.form[props.id].value === ""
-              ? "selectAnOption"
-              : props.form[props.id].value
-          }
-          onChange={(event: ChangeEvent<HTMLSelectElement>) =>
-            props.onInputChangeHandler(
-              props.id,
-              event.target.value,
-              props.isValid?.(event.target.value) ?? true
-            )
-          }
+          id={props.attributes.id}
+          className="w-full"
+          value={props.value}
+          onChange={dropDownChangeHandler}
         >
           <option disabled value="selectAnOption">
             Select an option
@@ -47,11 +38,7 @@ export const Dropdown = (props: DropDownProps) => {
             </option>
           ))}
         </select>
-
-        <div className="text-red-500 text-xs">
-          {props.form[props.id].isValid === false && props.error}
-        </div>
       </div>
-    </div>
+    </>
   );
 };

@@ -1,57 +1,43 @@
 import { ChangeEvent } from "react";
-import { FormStructure, FormValue, InputAttributes } from "../../../models/types";
+import { InputAttributes } from "../../../models/types";
 
 type FileUploadProps = {
   id: string;
   label: string;
   classes?: string;
-  isValid?: (fileValue: string) => boolean;
+  value: string;
   attributes: InputAttributes;
-  form: FormStructure<FormValue>;
   error?: string;
-  onInputChangeHandler: (label: string, value: string, isValid: boolean) => void;
+  onInputChangeHandler: (value: string) => void;
 };
 
 export const FileUpload = (props: FileUploadProps) => {
-  const onInputChangeHandler = (
-    label: string,
-    value: string,
-    isValid: boolean
-  ) => {
-    props.onInputChangeHandler(label, value, isValid);
+  const fileUploadChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    let url = "";
+    let fileName = "";
+    if (event.target.files?.[0]) {
+      fileName = event.target.files?.[0].name;
+      url = URL.createObjectURL(event.target.files[0]);
+    }
+    props.onInputChangeHandler(
+      fileName + "#" + url // use ``
+    );
   };
   return (
-    <div className={props.classes}>
+    <>
       <label htmlFor={props.attributes.id}>{props.label}</label>
       <div>
         <input
-          {...props.attributes}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            let url = "";
-            let fileName = "";
-            if (event.target.files?.[0]) {
-              fileName = event.target.files?.[0].name;
-              url = URL.createObjectURL(event.target.files[0]);
-            }
-            console.log(url);
-            return onInputChangeHandler(
-              props.id,
-              fileName + "#" + url,
-              props.isValid?.(event.target.value) ?? true
-            );
-          }}
-          className={
-            "opacity-0 absolute z-10 " +
-            (props.form[props.id].isValid === false ? "bg-red-200" : "bg-white w-full")
-          }
+          id={props.attributes.id}
+          type="file"
+          onChange={fileUploadChangeHandler}
+          className={props.classes} // THREE STATES, TOUCHED, UNTOUCHED
         ></input>
         <div className="absolute flex flex-row z-0">
           <button type="button">Choose a file</button>
-          <div className="pl-4 w-20 truncate">
-            {props.form[props.id].value.split("#")[0]}
-          </div>
+          <div className="pl-4 w-20 truncate">{props.value.split("#")[0]}</div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

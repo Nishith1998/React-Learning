@@ -4,15 +4,20 @@ import { Radio } from "../Inputs/Radio";
 import { FileUpload } from "../Inputs/FileUpload";
 import { Button } from "../Inputs/Button";
 import { ReactNode } from "react";
-import { FormStructure, FormValue, InputAttributes } from "../../../models/types";
+import {
+  InputAttributes,
+} from "../../../models/types";
+import { isButtonAttribute } from "../../../models/constants";
 
 type FormFieldProps = {
   id: string;
   label: string;
   type: string;
   attributes: InputAttributes;
-  form: FormStructure<FormValue>;
-  isValid?: (fieldValue: string) => boolean;
+  value: string;
+  isFormValid: () => boolean;
+  isValid: boolean;
+  isTouched: boolean;
   classes?: string;
   error?: string;
   options?: {
@@ -20,33 +25,44 @@ type FormFieldProps = {
     value: string;
   }[];
   onInputChange: (label: string, value: string, isValid: boolean) => void;
+  onBlur: (label: string, isTouched: boolean) => void;
 };
 
-const isButtonAttribute = (x: any): x is {id?: string, type: 'submit' | 'button'} => x.type === 'submit' || x.type === 'button'
 
 export const FormField = (props: FormFieldProps) => {
 
-  const isFormValid = () => {
-    return (
-      Object.values(props.form).filter(
-        (ele: any) => ele.isValid === false || ele.isValid === null
-      ).length !== 0
-    );
+
+  const onInputChangeHandler = (
+    label: string,
+    value: string,
+    isValid: boolean
+  ) => {
+    props.onInputChange(label, value, isValid);
   };
 
 
+  const fieldValueObj ={value: props.value, isValid: props.isValid, isTouched: props.isTouched} //props.form[props.id];
   const inputFieldMapper: { [key: string]: () => ReactNode } = {
     input: () => (
       <Input
         id={props.id}
         label={props.label}
-        attributes={{ ...props.attributes }}
-        value={props.form[props.id].value}
-        onInputChangeHandler={onInputChangeHandler}
-        classes={props.classes}
-        checkValid={props.isValid}
-        isValid={props.form[props.id].isValid}
-        error={props.error}
+        attributes={{
+          id: props.attributes.id,
+          type: props.attributes.type,
+          placeholder: props.attributes.placeholder,
+        }}
+        value={fieldValueObj.value}
+        onInputChangeHandler={(value: string) =>
+          onInputChangeHandler(props.id, value, props.isValid)
+        }
+        onInputBlurHandler={() => props.onBlur(props.id, true)}
+        classes={
+          fieldValueObj.isTouched ? (!fieldValueObj.isValid
+            ? "bg-red-200"
+            : "bg-white w-full") : "bg-white"
+        }
+        error={fieldValueObj.isValid && props.isTouched ? props.error: ""}
       />
     ),
 
@@ -54,12 +70,16 @@ export const FormField = (props: FormFieldProps) => {
       <Dropdown
         id={props.id}
         label={props.label}
-        classes={props.classes}
+        value={
+          fieldValueObj.value === ""
+            ? "selectAnOption"
+            : fieldValueObj.value
+        }
         attributes={{ ...props.attributes }}
-        form={props.form}
-        isValid={props.isValid?.bind(this)}
         options={props.options ?? []}
-        onInputChangeHandler={onInputChangeHandler}
+        onInputChangeHandler={(value: string) =>
+          onInputChangeHandler(props.id, value, props.isValid)
+        }
         error={props.error}
       />
     ),
@@ -70,10 +90,11 @@ export const FormField = (props: FormFieldProps) => {
         label={props.label}
         classes={props.classes}
         attributes={{ ...props.attributes }}
-        form={props.form}
-        isValid={props.isValid}
+        value={fieldValueObj.value}
         options={props.options ?? []}
-        onInputChangeHandler={onInputChangeHandler}
+        onInputChangeHandler={(value: string) =>
+          onInputChangeHandler(props.id, value, props.isValid)
+        }
         error={props.error}
       />
     ),
@@ -82,33 +103,37 @@ export const FormField = (props: FormFieldProps) => {
       <FileUpload
         id={props.id}
         label={props.label}
-        classes={props.classes}
+        classes={
+          `opacity-0 absolute z-10 ${
+            fieldValueObj.isValid
+              ? "bg-red-200"
+              : "bg-white w-full"
+          }` // boolean ke
+        }
         attributes={{ ...props.attributes }}
-        form={props.form}
-        isValid={props.isValid}
-        onInputChangeHandler={onInputChangeHandler}
+        value={fieldValueObj.value}
+        onInputChangeHandler={(value: string) =>
+          onInputChangeHandler(props.id, value, props.isValid)
+        }
         error={props.error}
       />
     ),
 
     button: () => (
       <Button
-        form={props.form}
-        classes={props.classes}
+        classes={`col-span-2 bg-blue-200 w-20 ${
+          props.isFormValid() ? "bg-white opacity-70" : ""
+        }`}
+        disabled={props.isFormValid()}
         label={props.label}
-        isFormValid={isFormValid}
-        attributes={ isButtonAttribute(props.attributes) ? props.attributes : {id: 'as', type: 'button'}}
+        attributes={
+          isButtonAttribute(props.attributes)
+            ? props.attributes
+            : { type: "button" }
+        }
       />
     ),
   };
 
-  const onInputChangeHandler = (
-    label: string,
-    value: string,
-    isValid: boolean
-  ) => {
-    props.onInputChange(label, value, isValid);
-  };
-
-  return <>{inputFieldMapper[props.type]()}</>;
+  return <div className={props.classes}>{inputFieldMapper[props.type]()}</div>;
 };

@@ -12,14 +12,14 @@ export const INITIAL_FORM_VALUE: FormValue = {
 };
 
 export const FROM_STRUCTURE_INITIAL: FormStructure<FormValue> = {
-    firstName: {value: '', isValid: null},
-    lastName: {value: '', isValid: null},
-    email: {value: '', isValid: null},
-    dob: {value: '', isValid: null},
-    highestEducation: {value: '', isValid: true},
-    designation: {value: '', isValid: true},
-    gender: {value: '', isValid: null},
-    profilePic: {value: '', isValid: null},
+    firstName: {value: '', isValid: null, isTouched: false},
+    lastName: {value: '', isValid: null, isTouched: false},
+    email: {value: '', isValid: null, isTouched: false},
+    dob: {value: '', isValid: null, isTouched: false},
+    highestEducation: {value: '', isValid: true, isTouched: false},
+    designation: {value: '', isValid: true, isTouched: false},
+    gender: {value: '', isValid: null, isTouched: false},
+    profilePic: {value: '', isValid: null, isTouched: false},
     // submitButton: {value: '', isValid: true},
 }
 
@@ -169,3 +169,8 @@ export const tableHeader: TableHeaderType[] = [
     colName: "Delete",
   },
 ];
+
+export const isButtonAttribute = (
+  x: any
+): x is { id?: string; type: "submit" | "button" } =>
+  x.type === "submit" || x.type === "button";

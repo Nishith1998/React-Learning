@@ -1,31 +1,26 @@
 import { ChangeEvent } from "react";
-import { FormStructure, FormValue, InputAttributes } from "../../../models/types";
+import { InputAttributes } from "../../../models/types";
 
 type RadioProps = {
   id: string;
   label: string;
   classes?: string;
-  isValid?: (radioValue: string) => boolean;
+  value: string;
   attributes: InputAttributes;
   options: {
     label: string;
     value: string;
   }[];
-  form: FormStructure<FormValue>;
   error?: string;
-  onInputChangeHandler: (label: string, value: string, isValid: boolean) => void;
+  onInputChangeHandler: (value: string) => void;
 };
 
 export const Radio = (props: RadioProps) => {
-  const onInputChangeHandler = (
-    label: string,
-    value: string,
-    isValid: boolean
-  ) => {
-    props.onInputChangeHandler(label, value, isValid);
+  const radioChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    props.onInputChangeHandler(event.target.value);
   };
   return (
-    <div className={props.classes}>
+    <>
       <label htmlFor={props.attributes.id}>{props.label}</label>
       <div className="grid grid-cols-2 gap-2">
         {props.options.map((option: { label: string; value: string }) => {
@@ -37,14 +32,8 @@ export const Radio = (props: RadioProps) => {
                 name={"radio-" + props.attributes.id}
                 type="radio"
                 value={option.value}
-                checked={props.form[props.id].value === option.value}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  onInputChangeHandler(
-                    props.id,
-                    event.target.value,
-                    props.isValid?.(event.target.value) ?? true
-                  );
-                }}
+                checked={props.value === option.value}
+                onChange={radioChangeHandler}
               ></input>
               <label
                 className="pl-2"
@@ -57,6 +46,6 @@ export const Radio = (props: RadioProps) => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
