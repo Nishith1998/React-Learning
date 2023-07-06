@@ -38,6 +38,9 @@ export const FileUpload = (props: FileUploadProps) => {
           <div className="pl-4 w-20 truncate">{props.value.split("#")[0]}</div>
         </div>
       </div>
+      <div className="text-red-500 text-xs">
+        {props.error !== "" && props.error}
+      </div>
     </>
   );
 };

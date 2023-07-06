@@ -46,6 +46,9 @@ export const Radio = (props: RadioProps) => {
           );
         })}
       </div>
+      <div className="text-red-500 text-xs">
+        {props.error !== "" && props.error}
+      </div>
     </>
   );
 };

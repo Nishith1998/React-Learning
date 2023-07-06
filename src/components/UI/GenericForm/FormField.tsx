@@ -58,11 +58,11 @@ export const FormField = (props: FormFieldProps) => {
         }
         onInputBlurHandler={() => props.onBlur(props.id, true)}
         classes={
-          fieldValueObj.isTouched ? (!fieldValueObj.isValid
+          !fieldValueObj.isValid
             ? "bg-red-200"
-            : "bg-white w-full") : "bg-white"
+            : "bg-white w-full"
         }
-        error={fieldValueObj.isValid && props.isTouched ? props.error: ""}
+        error={!fieldValueObj.isValid ? props.error: ""}
       />
     ),
 
@@ -80,7 +80,7 @@ export const FormField = (props: FormFieldProps) => {
         onInputChangeHandler={(value: string) =>
           onInputChangeHandler(props.id, value, props.isValid)
         }
-        error={props.error}
+        error={!fieldValueObj.isValid ? props.error: ""}
       />
     ),
 
@@ -95,7 +95,7 @@ export const FormField = (props: FormFieldProps) => {
         onInputChangeHandler={(value: string) =>
           onInputChangeHandler(props.id, value, props.isValid)
         }
-        error={props.error}
+        error={!fieldValueObj.isValid ? props.error: ""}
       />
     ),
 
@@ -115,7 +115,7 @@ export const FormField = (props: FormFieldProps) => {
         onInputChangeHandler={(value: string) =>
           onInputChangeHandler(props.id, value, props.isValid)
         }
-        error={props.error}
+        error={!fieldValueObj.isValid ? props.error: ""}
       />
     ),
 

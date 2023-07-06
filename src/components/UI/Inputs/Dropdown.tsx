@@ -39,6 +39,9 @@ export const Dropdown = (props: DropDownProps) => {
           ))}
         </select>
       </div>
+      <div className="text-red-500 text-xs">
+        {props.error !== "" && props.error}
+      </div>
     </>
   );
 };

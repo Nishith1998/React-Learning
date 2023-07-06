@@ -10,6 +10,8 @@ type UserRegistrationFormProps = {
 };
 
 export const UserRegistrationForm = (props: UserRegistrationFormProps) => {
+  console.log('Registration: formValue', props.formValue);
+  console.log("UserRegistrationForm: ", )
   const onSubmit = (formValue: FormValue): void => {
     console.log(formValue);
     props.onAddUser({

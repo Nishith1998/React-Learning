@@ -8,17 +8,13 @@ type InputProps = {
   value: string;
   classes?: string;
   error?: string;
-  onInputChangeHandler: (
-    value: string,
-  ) => void;
+  onInputChangeHandler: (value: string) => void;
   onInputBlurHandler: () => void;
 };
 
 export const Input = (props: InputProps) => {
   const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
-    props.onInputChangeHandler(
-      event.target.value,
-    );
+    props.onInputChangeHandler(event.target.value);
 
   return (
     <>
@@ -33,9 +29,9 @@ export const Input = (props: InputProps) => {
           onBlur={props.onInputBlurHandler}
           className={props.classes}
         ></input>
-        <div className="text-red-500 text-xs">
-          {props.error !== '' && props.error}
-        </div>
+      </div>
+      <div className="text-red-500 text-xs">
+        {props.error !== "" && props.error}
       </div>
     </>
   );

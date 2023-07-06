@@ -85,7 +85,8 @@ export const FORM_FIELDS: GenericFormField<FormValue>[] = [
       { label: "Graduate", value: "Graduate" },
       { label: "Post Graduate", value: "Post Graduate" },
     ],
-    isValid: (value: string) => true,
+    isValid: (value: string) => (value !== '' && value !== 'selectAnOption'),
+    error: "Highest education is required",
     classes: "grid grid-cols-2 my-2"
 
   },
@@ -101,7 +102,8 @@ export const FORM_FIELDS: GenericFormField<FormValue>[] = [
       { label: "Team Lead", value: "Team Lead" },
       { label: "Practice Head", value: "Practice Head" },
     ],
-    isValid: (value: string) => true,
+    isValid: (value: string) => (value !== '' && value !== 'selectAnOption'),
+    error: "Designation is required",
     classes: "grid grid-cols-2 my-2"
 
   },
@@ -115,8 +117,8 @@ export const FORM_FIELDS: GenericFormField<FormValue>[] = [
       { label: "Female", value: "female" },
     ],
     isValid: (value: string) => value.trim().length !== 0,
-    classes: "grid grid-cols-2 my-2"
-
+    classes: "grid grid-cols-2 my-2",
+    error: "Gender is required",
   },
   {
     id: "profilePic",
@@ -124,8 +126,8 @@ export const FORM_FIELDS: GenericFormField<FormValue>[] = [
     label: "Upload profile picture",
     attributes: { type: "file" },
     isValid: (value: string) => value.trim().length !== 0,
-    classes: "grid grid-cols-2 my-2"
-
+    classes: "grid grid-cols-2 my-2",
+    error: "Profile pic is required",
   },
   {
     id: "submitButton",
