@@ -13,6 +13,7 @@ import {
 
 type GenericFormProps = {
   formFields: GenericFormField<FormValue>[];
+  genericFormValue: FormStructure<FormValue>;
   onSubmit: (formValue: FormValue) => void;
 };
 
@@ -22,9 +23,11 @@ export const GenericForm = (props: GenericFormProps) => {
   // props.formFields.forEach(ele => {
   //   formStructureWithValue[ele.id] = ele.value;
   // })
+  console.log("GenericForm: props.genericFormValue: ", props.genericFormValue
+  )
 
   const [form, setForm] = useState<FormStructure<FormValue>>(
-    FROM_STRUCTURE_INITIAL
+    props.genericFormValue
   );
 
   const isFormValid = () => {
