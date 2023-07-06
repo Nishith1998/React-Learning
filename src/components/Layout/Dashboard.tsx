@@ -38,7 +38,10 @@ export const Dashboard = () => {
 
   return (
     <>
-      <UserRegistrationForm formValue={currentUserFormValue} onAddUser={addUserHandler} />
+      <UserRegistrationForm
+        formValue={currentUserFormValue}
+        onAddUser={addUserHandler}
+      />
       {userDetails.length !== 0 && (
         <UserInfo
           userDetails={userDetails}

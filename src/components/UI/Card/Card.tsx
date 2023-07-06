@@ -10,4 +10,3 @@ export const Card = (props: CardProps) => {
     </div>
   );
 };
-// layout

@@ -4,9 +4,7 @@ import { Radio } from "../Inputs/Radio";
 import { FileUpload } from "../Inputs/FileUpload";
 import { Button } from "../Inputs/Button";
 import { ReactNode } from "react";
-import {
-  InputAttributes,
-} from "../../../models/types";
+import { InputAttributes } from "../../../models/types";
 import { isButtonAttribute } from "../../../models/constants";
 
 type FormFieldProps = {
@@ -25,13 +23,10 @@ type FormFieldProps = {
     value: string;
   }[];
   onInputChange: (label: string, value: string, isValid: boolean) => void;
-  onBlur: (label: string, isTouched: boolean) => void;
+  onBlur: (label: string) => void;
 };
 
-
 export const FormField = (props: FormFieldProps) => {
-
-
   const onInputChangeHandler = (
     label: string,
     value: string,
@@ -40,8 +35,7 @@ export const FormField = (props: FormFieldProps) => {
     props.onInputChange(label, value, isValid);
   };
 
-
-  const fieldValueObj ={value: props.value, isValid: props.isValid, isTouched: props.isTouched} //props.form[props.id];
+  //const fieldValueObj ={value: props.value, isValid: props.isValid, isTouched: props.isTouched} //props.form[props.id];
   const inputFieldMapper: { [key: string]: () => ReactNode } = {
     input: () => (
       <Input
@@ -52,17 +46,13 @@ export const FormField = (props: FormFieldProps) => {
           type: props.attributes.type,
           placeholder: props.attributes.placeholder,
         }}
-        value={fieldValueObj.value}
+        value={props.value}
         onInputChangeHandler={(value: string) =>
           onInputChangeHandler(props.id, value, props.isValid)
         }
-        onInputBlurHandler={() => props.onBlur(props.id, true)}
-        classes={
-          !fieldValueObj.isValid
-            ? "bg-red-200"
-            : "bg-white w-full"
-        }
-        error={!fieldValueObj.isValid ? props.error: ""}
+        onInputBlurHandler={() => props.onBlur(props.id)}
+        classes={!props.isValid ? "bg-red-200" : "bg-white w-full"}
+        error={!props.isValid ? props.error : ""}
       />
     ),
 
@@ -70,17 +60,13 @@ export const FormField = (props: FormFieldProps) => {
       <Dropdown
         id={props.id}
         label={props.label}
-        value={
-          fieldValueObj.value === ""
-            ? "selectAnOption"
-            : fieldValueObj.value
-        }
+        value={props.value === "" ? "selectAnOption" : props.value}
         attributes={{ ...props.attributes }}
         options={props.options ?? []}
         onInputChangeHandler={(value: string) =>
           onInputChangeHandler(props.id, value, props.isValid)
         }
-        error={!fieldValueObj.isValid ? props.error: ""}
+        error={!props.isValid ? props.error : ""}
       />
     ),
 
@@ -90,12 +76,12 @@ export const FormField = (props: FormFieldProps) => {
         label={props.label}
         classes={props.classes}
         attributes={{ ...props.attributes }}
-        value={fieldValueObj.value}
+        value={props.value}
         options={props.options ?? []}
         onInputChangeHandler={(value: string) =>
           onInputChangeHandler(props.id, value, props.isValid)
         }
-        error={!fieldValueObj.isValid ? props.error: ""}
+        error={!props.isValid ? props.error : ""}
       />
     ),
 
@@ -105,17 +91,15 @@ export const FormField = (props: FormFieldProps) => {
         label={props.label}
         classes={
           `opacity-0 absolute z-10 ${
-            fieldValueObj.isValid
-              ? "bg-red-200"
-              : "bg-white w-full"
+            props.isValid ? "bg-red-200" : "bg-white w-full"
           }` // boolean ke
         }
         attributes={{ ...props.attributes }}
-        value={fieldValueObj.value}
+        value={props.value}
         onInputChangeHandler={(value: string) =>
           onInputChangeHandler(props.id, value, props.isValid)
         }
-        error={!fieldValueObj.isValid ? props.error: ""}
+        error={!props.isValid ? props.error : ""}
       />
     ),
 
