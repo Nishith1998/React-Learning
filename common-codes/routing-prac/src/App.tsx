@@ -1,5 +1,5 @@
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Products } from "./pages/Products";
 import { Error } from "./components/Error";
@@ -19,10 +19,28 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+        loader: async () => {
+          let response = await fetch('https://real-time-emp-8518f-default-rtdb.firebaseio.com/cart.json');
+          let data;
+          try {
+            if(response.ok) {
+              data = await response.json();
+            }
+          } catch {
+            // error
+          }
+          return data;
+        }
       },
       {
-        path: "/product-details/:productId",
-        element: <ProductDetails />,
+        path: "/product-details",
+        element: <Outlet />,
+        children: [
+          {
+            path: ":productId",
+            element: <ProductDetails />
+          }
+        ]
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom"
 
 const PRODUCTS = [
     {
@@ -12,7 +12,8 @@ const PRODUCTS = [
 ]
 
 export const Products = () => {
-
+    const loaderData = useLoaderData();
+    console.log("loader data: ", loaderData)
     return (
         <div>
             {PRODUCTS.map(product => <div>
